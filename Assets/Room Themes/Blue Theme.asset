@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5a98ca35fb80a47a8fb3f97ca8bf57, type: 3}
+  m_Name: Blue Theme
+  m_EditorClassIdentifier: 
+  targetType: 1
+  columnLightColor: {r: 0, g: 0.50179243, b: 1, a: 1}
+  torusColor: {r: 0, g: 1, b: 0.9400835, a: 0.57254905}
+  roomProfile: {fileID: 0}
