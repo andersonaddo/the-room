@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb5a98ca35fb80a47a8fb3f97ca8bf57, type: 3}
-  m_Name: Blue Theme
+  m_Name: Red Theme
   m_EditorClassIdentifier: 
   targetType: 0
   lightConfigurations:
@@ -19,16 +19,16 @@ MonoBehaviour:
     intensity: 0.76
     range: 14.3
   - targetClassification: 1
-    realTimeLightColor: {r: 0.05882353, g: 0.23810196, b: 0.74509805, a: 1}
-    intensity: 3.16
-    range: 21.74
+    realTimeLightColor: {r: 0.74509805, g: 0.05882353, b: 0.118537195, a: 1}
+    intensity: 3.64
+    range: 21.63
   - targetClassification: 2
-    realTimeLightColor: {r: 0, g: 0.735849, b: 0.53343713, a: 1}
+    realTimeLightColor: {r: 0.83137256, g: 0, b: 0.09733608, a: 1}
     intensity: 1.24
     range: 21.79
   materialConfigurations:
   - mat: {fileID: 2100000, guid: 6b6dfd77776c54a4781ec8cab4d87860, type: 2}
     emissMatColor: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 0}
   - mat: {fileID: 2100000, guid: 0fbc58016a1b0a647b060f18bcc54124, type: 2}
-    emissMatColor: {r: 0, g: 0.5773268, b: 1, a: 0}
+    emissMatColor: {r: 1, g: 0, b: 0, a: 0}
   roomProfile: {fileID: 0}

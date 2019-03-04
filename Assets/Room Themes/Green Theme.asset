@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -12,6 +13,22 @@ MonoBehaviour:
   m_Name: Green Theme
   m_EditorClassIdentifier: 
   targetType: 2
-  columnLightColor: {r: 0, g: 1, b: 0.30792046, a: 1}
-  torusColor: {r: 0.14792144, g: 1, b: 0, a: 0.5294118}
-  roomProfile: {fileID: 11400000, guid: 67201b9d5a97c374e861eaa381d4e35c, type: 2}
+  lightConfigurations:
+  - targetClassification: 0
+    realTimeLightColor: {r: 1, g: 1, b: 1, a: 1}
+    intensity: 0.76
+    range: 14.3
+  - targetClassification: 1
+    realTimeLightColor: {r: 0.05882353, g: 0.74509805, b: 0.075174786, a: 1}
+    intensity: 3.16
+    range: 21.74
+  - targetClassification: 2
+    realTimeLightColor: {r: 0.60220665, g: 0.83137256, b: 0, a: 1}
+    intensity: 1.24
+    range: 21.79
+  materialConfigurations:
+  - mat: {fileID: 2100000, guid: 6b6dfd77776c54a4781ec8cab4d87860, type: 2}
+    emissMatColor: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 0}
+  - mat: {fileID: 2100000, guid: 0fbc58016a1b0a647b060f18bcc54124, type: 2}
+    emissMatColor: {r: 0.037148237, g: 1, b: 0, a: 0}
+  roomProfile: {fileID: 0}
