@@ -7,7 +7,6 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
 
     [SerializeField] cubeTypes type;
     [SerializeField] float rotSpeed, explosionRadius, explosionForce;
-    public GameObject brokenCube;
     Vector3 prefreezeAngularVelocity, prefreezeLinearVelocity;
 
     public int bulletShotScore, megaCubeScore;
@@ -55,7 +54,9 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
 
     void explode(Vector3 position)
     {
-        GameObject bc = Instantiate(brokenCube, transform.position, transform.rotation);
+        GameObject bc = objectPooler.Instance.requestObject("brokencube");
+        bc.transform.position = transform.position;
+        bc.transform.rotation = transform.rotation;
         bc.GetComponent<brokenCube>().initialize(
             GetComponent<Light>().color,
             GetComponent<MeshRenderer>().material,

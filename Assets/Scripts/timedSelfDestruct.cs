@@ -5,14 +5,21 @@ using UnityEngine;
 public class timedSelfDestruct : MonoBehaviour {
 
     [SerializeField] float aliveTime;
+    [SerializeField] bool startOnAwake = true;
+
 
     public void cancel()
     {
         CancelInvoke();
     }
 
-	void Start () {
+   public void startTimer()
+    {
         Invoke("selfDestruct", aliveTime);
+    }
+
+	void Start () {
+        if (startOnAwake) startTimer();
 	}
 	
 	void selfDestruct () {

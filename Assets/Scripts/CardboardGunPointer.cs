@@ -26,7 +26,8 @@ public class CardboardGunPointer : GvrBasePointer
 
     public override void OnPointerClickDown()
     {
-        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+        GameObject newBullet = objectPooler.Instance.requestObject("bullet");
+        newBullet.transform.position = transform.position;
         newBullet.GetComponent<playerBullet>().launch(transform.forward);
     }
 
