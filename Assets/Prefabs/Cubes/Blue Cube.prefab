@@ -167,6 +167,8 @@ MonoBehaviour:
   explosionRadius: 30
   explosionForce: 150
   brokenCube: {fileID: 1671025194851476, guid: 5ea99b14926f5204b8e58d77241ab976, type: 3}
+  bulletShotScore: 50
+  megaCubeScore: 25
 --- !u!114 &114937735047628688
 MonoBehaviour:
   m_ObjectHideFlags: 0

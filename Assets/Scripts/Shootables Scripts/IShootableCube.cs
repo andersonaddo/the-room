@@ -3,7 +3,7 @@
 public interface IShootableCube {
 
     cubeTypes _type { get; }
-    void onShot(Vector3 shotPosition);
+    void onShot(Vector3 shotPosition, damageEffectors damageEffector);
 }
 
 public enum cubeTypes {
@@ -13,4 +13,10 @@ public enum cubeTypes {
     purple,
     orange,
     special
+}
+
+public enum damageEffectors
+{
+    bullet,
+    megaCube
 }

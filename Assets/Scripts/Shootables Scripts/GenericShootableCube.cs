@@ -10,6 +10,8 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
     public GameObject brokenCube;
     Vector3 prefreezeAngularVelocity, prefreezeLinearVelocity;
 
+    public int bulletShotScore, megaCubeScore;
+
     public cubeTypes _type
     {
         get { return type; }
@@ -20,9 +22,9 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
         GetComponent<Rigidbody>().angularVelocity = Random.insideUnitSphere * rotSpeed;
     }
 
-    public void onShot(Vector3 position)
+    public void onShot(Vector3 position, damageEffectors effector)
     {
-        doPoints();
+        calculatePoints(effector);
         explode(position);
     }
 
@@ -35,11 +37,11 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
         rb.isKinematic = true;
     }
 
-    public void unfreeze(bool destroyIfPossible)
+    public void unfreeze(bool destroyIfPossible, damageEffectors effector)
     {
         if (destroyIfPossible)
         {
-            doPoints();
+            calculatePoints(effector);
             explode(transform.position);
         }
         else
@@ -63,8 +65,16 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
         Destroy(gameObject);
     }
 
-    void doPoints()
+    protected void calculatePoints(damageEffectors effector)
     {
-
+        if (effector == damageEffectors.bullet)
+        {
+            if (gameManager.Instance.currentTargetType == type || type == cubeTypes.special)
+                gameManager.Instance.incrementScore(bulletShotScore);
+        }
+        else if (effector == damageEffectors.megaCube)
+        {
+            gameManager.Instance.incrementScore(bulletShotScore);
+        }
     }
 }

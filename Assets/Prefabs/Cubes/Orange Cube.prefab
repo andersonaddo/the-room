@@ -162,11 +162,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b1d90cecbc55241ac6964b2c7c8d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
+  type: 0
   rotSpeed: 1.5
   explosionRadius: 30
   explosionForce: 150
   brokenCube: {fileID: 1671025194851476, guid: 5ea99b14926f5204b8e58d77241ab976, type: 3}
+  bulletShotScore: 50
+  megaCubeScore: 25
 --- !u!114 &114934704525208770
 MonoBehaviour:
   m_ObjectHideFlags: 0

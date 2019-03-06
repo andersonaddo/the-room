@@ -13,10 +13,40 @@ public class roomVisualsChanger : MonoBehaviour
     List<LightChangeDeltas> lightDeltas = new List<LightChangeDeltas>();
     List<MaterialChangeDeltas> matDeltas = new List<MaterialChangeDeltas>();
 
+    void Awake()
+    {
+        currentIndex = Random.Range(0, roomThemes.Count);
+        transitionTo(roomThemes[currentIndex]);
+    }
+
+    void Update()
+    {
+        if (stopTime >= Time.time)
+        {
+            foreach (LightChangeDeltas lightDelta in lightDeltas)
+            {
+                foreach (LightClass lightClass in FindObjectsOfType<LightClass>().Where(light => light.classification == lightDelta.lightClassification))
+                {
+                    lightDelta.applyChange(lightClass.light, completionTime);
+                }
+            }
+
+            foreach (MaterialChangeDeltas matDelta in matDeltas)
+                matDelta.applyChange(completionTime);
+        }
+    }
+
+    public void chooseNextTheme()
+    {
+        currentIndex++;
+        if (currentIndex == roomThemes.Count) currentIndex = 0;
+        transitionTo(roomThemes[currentIndex]);
+    }
 
     //Should be called in update for timing to be correct
     void transitionTo(roomVisualsHolder newHolder)
     {
+        gameManager.Instance.updateTargetType(newHolder.targetType);
         lightDeltas.Clear();
         matDeltas.Clear();
         foreach(roomLightConfiguration lightConfig in newHolder.lightConfigurations)
@@ -32,30 +62,6 @@ public class roomVisualsChanger : MonoBehaviour
 
         //Changing will start on next update()
         stopTime = Time.time + completionTime;
-    }
-
-    void Update()
-    {
-        if (stopTime >= Time.time)
-        {
-            foreach(LightChangeDeltas lightDelta in lightDeltas)
-            {
-                foreach (LightClass lightClass in FindObjectsOfType<LightClass>().Where(light => light.classification == lightDelta.lightClassification))
-                {
-                    lightDelta.applyChange(lightClass.light, completionTime);
-                }
-            }
-
-            foreach (MaterialChangeDeltas matDelta in matDeltas)
-                matDelta.applyChange(completionTime);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentIndex++;
-            if (currentIndex == roomThemes.Count) currentIndex = 0;
-            transitionTo(roomThemes[currentIndex]);
-        }
     }
 }
 

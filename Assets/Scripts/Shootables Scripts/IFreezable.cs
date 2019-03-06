@@ -6,5 +6,5 @@ public interface IFreezable {
 
 
     void freeze();
-    void unfreeze(bool destroyIfPossible);
+    void unfreeze(bool destroyIfPossible, damageEffectors effector);
 }

@@ -24,8 +24,8 @@ public class playerBullet : MonoBehaviour {
     void OnCollisionEnter(Collision other)
     {
         IShootableCube cubeScript = other.gameObject.GetComponent<IShootableCube>();
-        if (cubeScript != null) cubeScript.onShot(transform.position);
+        if (cubeScript != null) cubeScript.onShot(transform.position, damageEffectors.bullet);
         destroyBullet(transform.position);
-        print("Bullet hit " + other.gameObject.name);
+        //print("Bullet hit " + other.gameObject.name);
     }
 }

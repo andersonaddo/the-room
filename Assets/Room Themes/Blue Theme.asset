@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5a98ca35fb80a47a8fb3f97ca8bf57, type: 3}
   m_Name: Blue Theme
   m_EditorClassIdentifier: 
-  targetType: 0
+  targetType: 1
   lightConfigurations:
   - targetClassification: 0
     realTimeLightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -23,7 +23,7 @@ MonoBehaviour:
     intensity: 3.16
     range: 21.74
   - targetClassification: 2
-    realTimeLightColor: {r: 0, g: 0.735849, b: 0.53343713, a: 1}
+    realTimeLightColor: {r: 0, g: 0.7127404, b: 0.9433962, a: 1}
     intensity: 1.24
     range: 21.79
   materialConfigurations:

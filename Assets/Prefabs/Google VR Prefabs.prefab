@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2117719547483378077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117719548206780488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f16331002c4294e9073d0767883377, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Notes: The event system that helps my gin pointer work.
 --- !u!114 &2117719547546156772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +59,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Notes: The main entry point to the Google VR controller API.
+--- !u!114 &2117719547483378077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117719548206780488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f16331002c4294e9073d0767883377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Notes: The event system that helps my gun pointer work with UI (the canvas should
+    have a Gvr Pointr Raycaster)
 --- !u!1001 &2117719547483378079
 PrefabInstance:
   m_ObjectHideFlags: 0
