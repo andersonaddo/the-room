@@ -5,16 +5,25 @@ using System.Linq;
 
 public class roomVisualsChanger : MonoBehaviour
 {
-    public float completionTime; 
+    public float completionTime;
     float stopTime;
+    static roomVisualsChanger Instance;
 
-    public List<roomVisualsHolder> roomThemes = new List<roomVisualsHolder>();
+    [SerializeField]
+    private List<roomVisualsHolder> roomThemes = new List<roomVisualsHolder>();
     int currentIndex;
+    public static roomVisualsHolder currentTheme
+    {
+        get { return Instance.roomThemes[Instance.currentIndex]; }
+    }
+
     List<LightChangeDeltas> lightDeltas = new List<LightChangeDeltas>();
     List<MaterialChangeDeltas> matDeltas = new List<MaterialChangeDeltas>();
+    public static event System.Action<roomVisualsHolder> themeChanged;
 
     void Awake()
     {
+        Instance = this;
         currentIndex = Random.Range(0, roomThemes.Count);
         transitionTo(roomThemes[currentIndex]);
     }
@@ -46,7 +55,7 @@ public class roomVisualsChanger : MonoBehaviour
     //Should be called in update for timing to be correct
     void transitionTo(roomVisualsHolder newHolder)
     {
-        gameManager.Instance.updateTargetType(newHolder.targetType);
+        if (themeChanged != null) themeChanged(newHolder);
         lightDeltas.Clear();
         matDeltas.Clear();
         foreach(roomLightConfiguration lightConfig in newHolder.lightConfigurations)

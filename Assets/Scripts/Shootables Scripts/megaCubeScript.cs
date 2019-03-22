@@ -28,7 +28,7 @@ public class megaCubeScript : GenericShootableCube, IShootableCube, IFreezable
         preExplosionFreeze();
         Instantiate(explosionPS, transform.position, Quaternion.identity);
 
-        List<GameObject> freezables = FindObjectsOfType<GameObject>().Where(go => go.GetComponent<IFreezable>() != null).ToList<GameObject>();
+        List<GameObject> freezables = FindObjectsOfType<GameObject>().Where(go => go.GetComponent<IFreezable>() != null && !go.GetComponent<IFreezable>().isFrozen).ToList<GameObject>();
         freezables.Remove(gameObject); //So that it doesn't freeze itself
         foreach (GameObject ga in freezables)
         {

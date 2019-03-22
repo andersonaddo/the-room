@@ -26,9 +26,15 @@ MonoBehaviour:
     realTimeLightColor: {r: 0, g: 0.7127404, b: 0.9433962, a: 1}
     intensity: 1.24
     range: 21.79
+  - targetClassification: 3
+    realTimeLightColor: {r: 0, g: 0.28740972, b: 0.4528302, a: 1}
+    intensity: 13.39
+    range: 7.671976
   materialConfigurations:
   - mat: {fileID: 2100000, guid: 6b6dfd77776c54a4781ec8cab4d87860, type: 2}
     emissMatColor: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 0}
   - mat: {fileID: 2100000, guid: 0fbc58016a1b0a647b060f18bcc54124, type: 2}
     emissMatColor: {r: 0, g: 0.5773268, b: 1, a: 0}
+  - mat: {fileID: 2100000, guid: e305453a48fa58446882f6671dfa0d58, type: 2}
+    emissMatColor: {r: 0, g: 0.23703814, b: 1, a: 0}
   roomProfile: {fileID: 0}

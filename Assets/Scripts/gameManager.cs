@@ -11,33 +11,34 @@ public class gameManager : MonoBehaviour {
     int score;
     public event Action<int> scoreChanged;
 
-    public float firstRoomStarterTime;
-    float firstRoomMaxTime; //This could potentially be changed by power ups for something later on
-    float firstRoomTimeLeft;
+    [SerializeField]
+    float maxSummoningProgression;
+    float currentProgression;
 
     public float firstRoomThemeChangeTime;
     float nextThemeChangeTime;
     bool canChangeTheme = true;
 
-    public float getTimeLeftPercentage
+    [SerializeField] float progAdditionUponAbsorption = 5;
+
+    public List<Transform> absorbers = new List<Transform>();
+
+    public float progressionPercentage
     {
         get
         {
-            return firstRoomTimeLeft / firstRoomMaxTime;
+            return currentProgression / maxSummoningProgression;
         }
     }
 
 
     void Awake () {
         Instance = this;
-        firstRoomMaxTime = firstRoomStarterTime;
-        firstRoomTimeLeft = firstRoomStarterTime;
         nextThemeChangeTime = Time.time + firstRoomThemeChangeTime;
-	}
+        roomVisualsChanger.themeChanged += updateTargetType;
+    }
 	
 	void Update () {
-        if (firstRoomTimeLeft != 0) firstRoomTimeLeft -= Time.deltaTime;
-        if (firstRoomTimeLeft < 0) firstRoomTimeLeft = 0;
 
         if (Time.time > nextThemeChangeTime)
         {
@@ -52,8 +53,14 @@ public class gameManager : MonoBehaviour {
         if (scoreChanged != null) scoreChanged(score);
     }
 
-    public void updateTargetType (cubeTypes type)
+    public void updateTargetType (roomVisualsHolder holder)
     {
-        currentTargetType = type;
+        currentTargetType = holder.targetType;
+    }
+
+    public void signalCubeAbsorption()
+    {
+        currentProgression += progAdditionUponAbsorption;
+        if (currentProgression > maxSummoningProgression) currentProgression = maxSummoningProgression;
     }
 }

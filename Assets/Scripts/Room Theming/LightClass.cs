@@ -10,7 +10,8 @@ public class LightClass : MonoBehaviour
     {
         firstRoomBasic,
         firstRoomColumn,
-        firstRoomSecondary
+        firstRoomSecondary,
+        firstColonmHologramAbsorber
     }
 
     public Light light { get { return GetComponent<Light>(); } }

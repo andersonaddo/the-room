@@ -2,8 +2,9 @@
 
 public interface IShootableCube {
 
-    cubeTypes _type { get; }
+    cubeTypes type { get; }
     void onShot(Vector3 shotPosition, damageEffectors damageEffector);
+    void initialize();
 }
 
 public enum cubeTypes {

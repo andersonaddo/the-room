@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class cubeGenerator : MonoBehaviour {
 
-    public float coneAngle, speed, waitTime;
+    public float coneAngle, speed, baseWaitTime;
 
     public List<GameObject> cubes;
     public BoxCollider mainRegion, rightRegion, leftRegion;
@@ -26,15 +26,16 @@ public class cubeGenerator : MonoBehaviour {
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(difficultyCurveHolder.Instance.cubeGenerationRate.Evaluate(difficultyCurveHolder.currentDifficulty));
             BoxCollider spawnCollider = chooseRandomCollider();
             Vector3 spawnPoint = new Vector3(
                 Random.Range(spawnCollider.bounds.min.x, spawnCollider.bounds.max.x),
                 Random.Range(spawnCollider.bounds.min.y, spawnCollider.bounds.max.y),
                 Random.Range(spawnCollider.bounds.min.z, spawnCollider.bounds.max.z)
             );
-            GameObject cube = Instantiate(cubes[Random.Range(0, cubes.Count)], spawnPoint, Quaternion.identity);
+            GameObject cube = Instantiate(chooseCube(), spawnPoint, Quaternion.identity);
             cube.GetComponent<Rigidbody>().velocity = calculateVelocityVector(speed);
+            cube.GetComponent<IShootableCube>().initialize();
         }
     }	
 
@@ -44,5 +45,10 @@ public class cubeGenerator : MonoBehaviour {
         if (seed == 1) return leftRegion;
         if (seed == 2) return rightRegion;
         return mainRegion;
+    }
+
+    GameObject chooseCube()
+    {
+        return null;
     }
 }

@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveTime: 10
+  startOnAwake: 1
 --- !u!114 &114736695074495544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,13 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814a3b2b4bd479b4ab169b3717d05e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  _type: 5
   rotSpeed: 1.5
   explosionRadius: 30
   explosionForce: 150
-  brokenCube: {fileID: 1671025194851476, guid: 5ea99b14926f5204b8e58d77241ab976, type: 3}
   bulletShotScore: 75
   megaCubeScore: 0
+  baseAttractionSpeed: 0
   postHitRotSpeed: 1200
   explosionWaitTime: 5.2
   explosionPS: {fileID: 1091724680434892, guid: 432d46dc827b5da4db99368ab6b8bdad,
