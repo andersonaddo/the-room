@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class cubeGenerator : MonoBehaviour {
 
@@ -26,7 +27,7 @@ public class cubeGenerator : MonoBehaviour {
     {
         while (true)
         {
-            yield return new WaitForSeconds(difficultyCurveHolder.Instance.cubeGenerationRate.Evaluate(difficultyCurveHolder.currentDifficulty));
+            yield return new WaitForSeconds(difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.cubeGenerationRate));
             BoxCollider spawnCollider = chooseRandomCollider();
             Vector3 spawnPoint = new Vector3(
                 Random.Range(spawnCollider.bounds.min.x, spawnCollider.bounds.max.x),
@@ -47,8 +48,34 @@ public class cubeGenerator : MonoBehaviour {
         return mainRegion;
     }
 
+
     GameObject chooseCube()
     {
-        return null;
+        GameObject chosenCube;
+        int random = Random.Range(1, 101);
+        if (random <= difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.specialCubeChance))
+        {
+            //Choose a special cube
+            chosenCube = cubes[3];
+            return chosenCube;
+        }
+
+        random = Random.Range(1, 101); //Ok then let's reseed for the non-special cubes now.
+        if (random <= difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.targetCubePriority))
+        {
+            //Choose the target cube
+            chosenCube = cubes
+                .Where(cube => cube.GetComponent<IShootableCube>().type == gameManager.Instance.currentTargetType)
+                .FirstOrDefault();
+            return chosenCube;
+        }
+        else
+        {
+            var possibleCubes = cubes
+                .Where(cube => cube.GetComponent<IShootableCube>().type != gameManager.Instance.currentTargetType
+                && cube.GetComponent<IShootableCube>().type != cubeTypes.special);
+            chosenCube = possibleCubes.ElementAt(Random.Range(0, possibleCubes.Count()));
+            return chosenCube;
+        }
     }
 }

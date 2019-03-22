@@ -50,7 +50,7 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
         {
             rb.MovePosition(Vector3.MoveTowards(transform.position, 
                 attractingAbsorber.position,
-                baseAttractionSpeed * Time.deltaTime * difficultyCurveHolder.Instance.absorberStrengthMultiplier.Evaluate(difficultyCurveHolder.currentDifficulty)));
+                baseAttractionSpeed * Time.deltaTime * difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.absorberStrengthMultiplier)));
             Debug.DrawLine(transform.position, attractingAbsorber.position, Color.red);
         }
     }

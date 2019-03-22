@@ -23,4 +23,9 @@ public class difficultyCurveHolder : MonoBehaviour
             return Mathf.Clamp01((Time.time - Instance.startTime) / Instance.timeToFullDifficulty);
         }
     }
+
+    public static float getCurrentValue(AnimationCurve curve)
+    {
+        return curve.Evaluate(currentDifficulty);
+    }
 }
