@@ -34,6 +34,7 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable, I
 
     public void initialize()
     {
+        GetComponent<BoxCollider>().enabled = true;
         rb = GetComponent<Rigidbody>();
         instanciationVeclocityMagnitude = rb.velocity.magnitude;
         determineIfShouldBeAttracted(roomVisualsChanger.currentTheme);
@@ -59,7 +60,8 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable, I
         rb.isKinematic = false;
         GetComponent<timedSelfDestruct>().cancel();
         roomVisualsChanger.themeChanged -= determineIfShouldBeAttracted;
-        gameObject.SetActive(false);
+        GetComponent<BoxCollider>().enabled = false;
+        objectPooler.Instance.returnObject("genericCube", gameObject);
     }
 
     public void selfDestruct()

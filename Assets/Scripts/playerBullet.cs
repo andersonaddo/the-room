@@ -13,13 +13,14 @@ public class playerBullet : MonoBehaviour, ISelfDestructInstructions {
 	public void launch (Vector3 forwardDirection) {
         GetComponent<Rigidbody>().velocity = forwardDirection.normalized * speed;
         GetComponent<timedSelfDestruct>().startTimer();
-
     }
 
 
     void destroyBullet(Vector3 explosionPoint)
     {
-        Instantiate(explosion, explosionPoint, Quaternion.identity);
+        GameObject explosion = objectPooler.Instance.requestObject("bulletExplosion");
+        explosion.transform.position = explosionPoint;
+        explosion.GetComponent<bulletExplosionScript>().explode();
         resetForPooling();
     }
 
@@ -28,14 +29,13 @@ public class playerBullet : MonoBehaviour, ISelfDestructInstructions {
         IShootableCube cubeScript = other.gameObject.GetComponent<IShootableCube>();
         if (cubeScript != null) cubeScript.onShot(transform.position, damageEffectors.bullet);
         destroyBullet(transform.position);
-        //print("Bullet hit " + other.gameObject.name);
     }
 
     void resetForPooling()
     {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
-        gameObject.SetActive(false); //Can not be reused!
         GetComponent<timedSelfDestruct>().cancel();
+        objectPooler.Instance.returnObject("bullet", gameObject);
     }
 
     public void selfDestruct()

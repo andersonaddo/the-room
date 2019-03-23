@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 114937735047628688}
   - component: {fileID: 2923990776448396513}
   m_Layer: 11
-  m_Name: Blue Cube
+  m_Name: Generic Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveTime: 10
-  startOnAwake: 1
+  startOnAwake: 0
 --- !u!114 &2923990776448396513
 MonoBehaviour:
   m_ObjectHideFlags: 0

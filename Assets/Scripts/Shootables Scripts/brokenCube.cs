@@ -47,7 +47,7 @@ public class brokenCube : MonoBehaviour, ISelfDestructInstructions {
             rb.transform.localRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
             rb.transform.localPosition = originalLocalPositions[rb];
         }
-        gameObject.SetActive(false); //Can now be reused by pooler.
+        objectPooler.Instance.returnObject("brokencube", gameObject);
     }
 
     void recordOriginalPositions()

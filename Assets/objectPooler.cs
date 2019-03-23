@@ -5,51 +5,64 @@ using System.Linq;
 
 public class objectPooler : MonoBehaviour
 {
-    public static objectPooler Instance;
+    public static objectPooler Instance; //Just to make it easier to access this gameobject elsewhere
     public List<objectPoolingInfo> objectsToPool;
+
     Dictionary<string, GameObject> namePairs = new Dictionary<string, GameObject>();
     Dictionary<string, Transform> parentPairs = new Dictionary<string, Transform>();
-    Dictionary<GameObject, List<GameObject>> listPairs = new Dictionary<GameObject, List<GameObject>>();
+    Dictionary<GameObject, Queue<GameObject>> queuePairs = new Dictionary<GameObject, Queue<GameObject>>();
 
     void Awake()
     {
         Instance = this;
-        foreach(objectPoolingInfo info in objectsToPool)
+        //Creating the initial pools 
+        foreach (objectPoolingInfo info in objectsToPool)
         {
             GameObject Parent = new GameObject();
             parentPairs[info.nameToCall] = Parent.transform;
             Parent.transform.SetParent(transform);
             Parent.name = info.nameToCall + " Pooling Parent";
             namePairs.Add(info.nameToCall, info.GO);
-            listPairs.Add(info.GO, new List<GameObject>());
-            List<GameObject> newList = listPairs[info.GO];
+            queuePairs.Add(info.GO, new Queue<GameObject>());
+            Queue<GameObject> poolingQueue = queuePairs[info.GO];
 
             for (int i = 0; i < info.initialNumber; i++)
             {
                 GameObject newInstantiation = Instantiate(info.GO, Parent.transform);
                 newInstantiation.SetActive(false);
-                newList.Add(newInstantiation);
+                poolingQueue.Enqueue(newInstantiation);
             }            
         }
     }
 
-
+    /// <summary>
+    /// Returns an active gameobject
+    /// </summary>
     public GameObject requestObject(string name)
     {
-        GameObject fetchedGameObject = listPairs[namePairs[name]].Where(go => !go.activeSelf).FirstOrDefault();
-        if (fetchedGameObject == null)
+        Queue<GameObject> targetQueue = queuePairs[namePairs[name]];
+        if (targetQueue.Count == 0) //That means all the available poolable instances are in use...
         {
-            //That means all the GOs are in use right now. Make a new one!!
+            //Make a new one!!
             GameObject newInstantiation = Instantiate(namePairs[name], transform);
-            listPairs[namePairs[name]].Add(newInstantiation);
             newInstantiation.transform.SetParent(parentPairs[name]);
             return newInstantiation;
         }
         else
         {
-          fetchedGameObject.SetActive(true);
-          return fetchedGameObject;
+            GameObject fetchedGameObject = queuePairs[namePairs[name]].Dequeue();
+            fetchedGameObject.SetActive(true);
+            return fetchedGameObject;
         }
+    }
+
+    /// <summary>
+    /// Disables the object and places it back in pool
+    /// </summary>
+    public void returnObject(string name, GameObject gameObject)
+    {
+        gameObject.SetActive(false);
+        queuePairs[namePairs[name]].Enqueue(gameObject);
     }
 }
 

@@ -1769,6 +1769,9 @@ MonoBehaviour:
   - GO: {fileID: 1556381349586856, guid: d23fe4a5be7877e41a5002517331ac6a, type: 3}
     nameToCall: megaCube
     initialNumber: 5
+  - GO: {fileID: 1758051492591362, guid: ad015675c0d7af4458c151832630d21b, type: 3}
+    nameToCall: bulletExplosion
+    initialNumber: 10
 --- !u!4 &480172081
 Transform:
   m_ObjectHideFlags: 0

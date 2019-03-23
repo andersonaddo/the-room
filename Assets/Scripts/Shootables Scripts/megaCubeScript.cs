@@ -31,7 +31,8 @@ public class megaCubeScript : GenericShootableCube
         GetComponent<timedSelfDestruct>().cancel();
         roomVisualsChanger.themeChanged -= determineIfShouldBeAttracted;
         isActivated = false;
-        gameObject.SetActive(false);
+        GetComponent<BoxCollider>().enabled = false;
+        objectPooler.Instance.returnObject("megaCube", gameObject);
     }
 
     IEnumerator destroyAllCubes()
