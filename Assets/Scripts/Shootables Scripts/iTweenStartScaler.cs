@@ -9,7 +9,7 @@ public class iTweenStartScaler : MonoBehaviour
     public float time;
 
     // Start is called before the first frame update
-    void Start()
+    public void scale()
     {
         iTween.ScaleFrom(gameObject, iTween.Hash("scale", Vector3.zero,
                                                   "easetype", easeType,

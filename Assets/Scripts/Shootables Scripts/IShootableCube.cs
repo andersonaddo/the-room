@@ -11,8 +11,6 @@ public enum cubeTypes {
     red,
     blue,
     green,
-    purple,
-    orange,
     special
 }
 

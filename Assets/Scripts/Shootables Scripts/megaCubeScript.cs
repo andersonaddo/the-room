@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class megaCubeScript : GenericShootableCube, IShootableCube, IFreezable
+public class megaCubeScript : GenericShootableCube
 {
 
     [SerializeField] float postHitRotSpeed;
@@ -12,7 +12,7 @@ public class megaCubeScript : GenericShootableCube, IShootableCube, IFreezable
     Vector3 rotateVector;
     bool isActivated;
 
-    new public void onShot(Vector3 shotPosition, damageEffectors effector)
+    override public void onShot(Vector3 shotPosition, damageEffectors effector)
     {
         if (effector != damageEffectors.bullet) return;
         if (!isActivated)
@@ -20,6 +20,18 @@ public class megaCubeScript : GenericShootableCube, IShootableCube, IFreezable
             calculatePoints(effector);
             StartCoroutine("destroyAllCubes");
         }
+    }
+
+    override protected void resetForPooling()
+    {
+        isBeingAttracted = false;
+        attractingAbsorber = null;
+        isFrozen = false;
+        rb.isKinematic = false;
+        GetComponent<timedSelfDestruct>().cancel();
+        roomVisualsChanger.themeChanged -= determineIfShouldBeAttracted;
+        isActivated = false;
+        gameObject.SetActive(false);
     }
 
     IEnumerator destroyAllCubes()

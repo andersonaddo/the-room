@@ -1762,7 +1762,13 @@ MonoBehaviour:
     initialNumber: 5
   - GO: {fileID: 1671025194851476, guid: 5ea99b14926f5204b8e58d77241ab976, type: 3}
     nameToCall: brokencube
-    initialNumber: 20
+    initialNumber: 35
+  - GO: {fileID: 1727738957010722, guid: 1906ae2f53f538e42a61b68431398cfe, type: 3}
+    nameToCall: genericCube
+    initialNumber: 35
+  - GO: {fileID: 1556381349586856, guid: d23fe4a5be7877e41a5002517331ac6a, type: 3}
+    nameToCall: megaCube
+    initialNumber: 5
 --- !u!4 &480172081
 Transform:
   m_ObjectHideFlags: 0
@@ -5972,11 +5978,6 @@ MonoBehaviour:
   coneAngle: 45
   speed: 10
   baseWaitTime: 0.5
-  cubes:
-  - {fileID: 1727738957010722, guid: 1906ae2f53f538e42a61b68431398cfe, type: 3}
-  - {fileID: 1677708900413858, guid: 6a494ecec6d3e59488b47bd60ec3824d, type: 3}
-  - {fileID: 1473415404522610, guid: 1a0ca3a421efed24381140eea8c70756, type: 3}
-  - {fileID: 1556381349586856, guid: d23fe4a5be7877e41a5002517331ac6a, type: 3}
   mainRegion: {fileID: 1002913055}
   rightRegion: {fileID: 114602869}
   leftRegion: {fileID: 324378339}

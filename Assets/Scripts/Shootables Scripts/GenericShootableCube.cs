@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
+public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable, ISelfDestructInstructions
 {
+
+    public List<cubeConfig> possibleConfigurations = new List<cubeConfig>();
 
     [SerializeField] cubeTypes _type;
     public cubeTypes type
     {
         get { return _type; }
     }
-
+    
     bool _isFrozen;
     public bool isFrozen
     {
@@ -24,10 +26,10 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
     float instanciationVeclocityMagnitude;
 
     public int bulletShotScore, megaCubeScore;
-    Rigidbody rb;
+    protected Rigidbody rb;
 
-    bool isBeingAttracted;
-    Transform attractingAbsorber;
+    protected bool isBeingAttracted;
+    protected Transform attractingAbsorber;
     public float baseAttractionSpeed;
 
     public void initialize()
@@ -37,11 +39,32 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
         determineIfShouldBeAttracted(roomVisualsChanger.currentTheme);
         roomVisualsChanger.themeChanged += determineIfShouldBeAttracted;
         rb.angularVelocity = Random.insideUnitSphere * rotSpeed;
+        GetComponent<timedSelfDestruct>().startTimer();
+        GetComponent<iTweenStartScaler>().scale();
     }
 
-    void OnDestroy()
+    public void useConfig(cubeTypes configType)
     {
+        cubeConfig config = possibleConfigurations.Where(c => c.type == configType).FirstOrDefault();
+        GetComponent<Light>().color = config.lightColor;
+        GetComponent<MeshRenderer>().material = config.material;
+        _type = config.type;
+    }
+
+    virtual protected void resetForPooling()
+    {
+        isBeingAttracted = false;
+        attractingAbsorber = null;
+        isFrozen = false;
+        rb.isKinematic = false;
+        GetComponent<timedSelfDestruct>().cancel();
         roomVisualsChanger.themeChanged -= determineIfShouldBeAttracted;
+        gameObject.SetActive(false);
+    }
+
+    public void selfDestruct()
+    {
+        resetForPooling();
     }
 
     void FixedUpdate()
@@ -71,7 +94,7 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
         }
     }
 
-    public void onShot(Vector3 position, damageEffectors effector)
+    virtual public void onShot(Vector3 position, damageEffectors effector)
     {
         calculatePoints(effector);
         explode(position);
@@ -114,7 +137,7 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
             position,
             explosionForce,
             explosionRadius);
-        Destroy(gameObject);
+        resetForPooling();
     }
 
     protected void calculatePoints(damageEffectors effector)
@@ -129,4 +152,17 @@ public class GenericShootableCube : MonoBehaviour, IShootableCube, IFreezable
             gameManager.Instance.incrementScore(bulletShotScore);
         }
     }
+
+    void OnDestroy()
+    {
+        roomVisualsChanger.themeChanged -= determineIfShouldBeAttracted;
+    }
+}
+
+[System.Serializable]
+public class cubeConfig
+{
+    public cubeTypes type;
+    public Color lightColor;
+    public Material material;
 }

@@ -8,7 +8,7 @@ public class cubeAbsorber : MonoBehaviour
     {
         if (other.GetComponent<IShootableCube>().type == gameManager.Instance.currentTargetType)
         {
-            Destroy(other.gameObject);
+            other.GetComponent<GenericShootableCube>().selfDestruct();
             gameManager.Instance.signalCubeAbsorption();
         }
     }
