@@ -25,6 +25,7 @@ public class megaCubeScript : GenericShootableCube
     override protected void resetForPooling()
     {
         isBeingAttracted = false;
+        StopAllCoroutines();
         attractingAbsorber = null;
         isFrozen = false;
         rb.isKinematic = false;
