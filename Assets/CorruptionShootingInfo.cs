@@ -5,7 +5,7 @@ using UnityEngine;
 public class CorruptionShootingInfo : MonoBehaviour
 {
     public bool shouldDraw;
-    public Vector2Int shooterCubeMinRad, shooterCubeMaxRad;
+    public Vector2 shooterCubeMinRad, shooterCubeMaxRad;
     public float shooterCubeMinDistance, shooterCubeMaxDistance;
     public Transform player;
 

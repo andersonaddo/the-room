@@ -12,16 +12,19 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         get { return _type; }
     }
 
+    public iTween.EaseType launchEaseType;
+
     public float baseAngularVelocity, angularVectorChangeRate, angularChangeSpeed;
     Vector3 angularVector, ranndomVector;
     float nextAngularChangeTime;
 
     bool canShoot, hasShot;
-    public float shootWaitTime;
+    public float shootChargeTime;
     float currentShootProg;
     Image progImage;
 
-    public Transform target;
+    Transform target;
+    LineRenderer laser;
 
 
     void Awake()
@@ -31,7 +34,6 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         nextAngularChangeTime = Time.time + angularVectorChangeRate;
 
         progImage = GetComponentInChildren<Image>();
-        canShoot = true;
     }
 
     void Update()
@@ -41,16 +43,25 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         if (canShoot && !hasShot)
         {
             charge();
-            if (currentShootProg == shootWaitTime) shoot();
+            if (currentShootProg == shootChargeTime) shoot();
         }
 
     }
 
-    public void initialize()
+    public void launch(Vector3 restPostion, Transform target, float launchSpeed)
     {
-        throw new System.NotImplementedException();
+        this.target = target;
+        iTween.MoveTo(gameObject, iTween.Hash("position", restPostion,
+                                              "easeType", launchEaseType,
+                                              "onComplete", "enableShooting",
+                                              "onCompleteTarget", gameObject,
+                                              "speed", launchSpeed));
     }
 
+    void enableShooting()
+    {
+        canShoot = true;
+    }
 
     public void onShot(Vector3 shotPosition, damageEffectors damageEffector)
     {
@@ -72,13 +83,17 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
 
     void charge()
     {
-        currentShootProg = Mathf.MoveTowards(currentShootProg, shootWaitTime, Time.deltaTime);
-        progImage.fillAmount = currentShootProg / shootWaitTime;
+        currentShootProg = Mathf.MoveTowards(currentShootProg, shootChargeTime, Time.deltaTime);
+        progImage.fillAmount = currentShootProg / shootChargeTime;
     }
 
     void shoot()
     {
+        laser = GetComponentInChildren<LineRenderer>();
         hasShot = true;
-        Debug.DrawLine(transform.position, target.position, Color.cyan, 5f);
+        laser.SetPosition(1, (target.transform.position - laser.transform.position) / transform.localScale.x); //Assuming that the scale is uniform
+        laser.enabled = true;
     }
+
+    public void initialize() { /**Meh nothing here*/ }
 }

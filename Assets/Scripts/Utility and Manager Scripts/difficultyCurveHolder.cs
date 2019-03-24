@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class difficultyCurveHolder : MonoBehaviour
 {
-    public AnimationCurve absorberStrengthMultiplier, targetCubePriority, specialCubeChance, cubeGenerationRate;
+    [CurveColor(CurveColorAttribute.availableCurveColors.green)]
+    public AnimationCurve absorberStrengthMultiplier, targetCubePriority, specialCubeChance, cubeGenerationRate; //For the first room.
+
+    [CurveColor(CurveColorAttribute.availableCurveColors.cyan)]
+    public AnimationCurve shooterCubeLaunchSpeed; //For the escape corridor
+
     public static difficultyCurveHolder Instance;
 
     [SerializeField] float timeToFullDifficulty;
