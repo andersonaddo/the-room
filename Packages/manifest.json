@@ -8,6 +8,7 @@
     "com.unity.probuilder": "3.0.9",
     "com.unity.progrids": "3.0.3-preview.4",
     "com.unity.purchasing": "2.0.1",
+    "jp.keijiro.kino.post-processing": "https://github.com/keijiro/kino.git#upm",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.assetbundle": "1.0.0",
@@ -38,5 +39,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "jp.keijiro.kino.post-processing": {
+      "hash": "0996b2d07dc1000963cc7264e5528abbebde8425",
+      "revision": "upm"
+    }
   }
 }
