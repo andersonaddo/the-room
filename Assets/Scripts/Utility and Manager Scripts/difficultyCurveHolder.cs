@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class difficultyCurveHolder : MonoBehaviour
 {
+    //For the first room.
     [CurveColor(CurveColorAttribute.availableCurveColors.green)]
-    public AnimationCurve absorberStrengthMultiplier, targetCubePriority, specialCubeChance, cubeGenerationRate; //For the first room.
+    public AnimationCurve absorberStrengthMultiplier, targetCubePriority, specialCubeChance, cubeGenerationRate;
 
+    //For the escape corridor
     [CurveColor(CurveColorAttribute.availableCurveColors.cyan)]
-    public AnimationCurve shooterCubeLaunchSpeed; //For the escape corridor
+    public AnimationCurve shooterCubeLaunchSpeed, corruptionDeltaZ;
 
     public static difficultyCurveHolder Instance;
 
     [SerializeField] float timeToFullDifficulty;
     float startTime;
+
+    enum difficultyModes
+    {
+        firstRoom,
+        escapeCorridor,
+        bossRoom
+    }
 
     void Awake()
     {
@@ -32,5 +41,10 @@ public class difficultyCurveHolder : MonoBehaviour
     public static float getCurrentValue(AnimationCurve curve)
     {
         return curve.Evaluate(currentDifficulty);
+    }
+
+    public void resetDifficulty()
+    {
+        startTime = Time.deltaTime;
     }
 }
