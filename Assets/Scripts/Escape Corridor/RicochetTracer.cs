@@ -12,26 +12,28 @@ public class RicochetTracer : MonoBehaviour
     }
 
     public Transform target;
-    public float ricochetRadius;
+    public float ricochetObjectRadius;
     public LayerMask interactingLayers;
-    public float maxRicoshetLenth;
+    public float maxPathSegmentLength;
     public int maxNumberofBounces;
     public rickochetMode editorRicochetMode;
 
     RicochetPath editorRicochetPath;
 
-    public Vector2 hitRadius, hitOffSet;
-    public Vector2 nearMissRadius, nearmissOffset;
-    public Vector2 missRadius, missOffset;
+    public Vector2 hitRegionSize, hitRegionOffset;
+    public Vector2 nearMissRegionSize, nearMissRegionOffset;
+    public Vector2 missRegionSize, missRegionOffset;
     [Tooltip("Buffer between the hit area and the nearmiss area to prevent boxes destined to land near the edges ")]
-    public Vector2 hitBuffer, bufferOffset;
+    public Vector2 hitBufferRegionSize, bufferRegionOffset;
 
     Rect missRect, nearMissRect, bufferRect, hitRect;
 
-    [Tooltip("x = XDirection, y = positiveYdirection, z (if not 0) represents negative y direction. None of these should be negative")]
-    public Vector3 maxHitAngle, maxNearMissAngle, maxMissAngle;
+    [Tooltip("x = x direction, y = positive y direction, z (if not 0) represents negative y direction. None of these should be negative")]
+    public Vector3 maxHitAngles, maxNearMissAngles, maxMissAngles;
 
-    public bool shouldDrawBullsEye, shouldVisualizeReceptionAngles, shouldVisualizePaths;
+    public bool shouldDrawBullsEye;
+    [Tooltip("This is expensive, so it'll show down the Scene View noticeably")]public bool shouldVisualizeReceptionAngles;
+    public bool shouldVisualizePaths;
 
 
     #region Editor Visualization
@@ -46,13 +48,13 @@ public class RicochetTracer : MonoBehaviour
         if (shouldDrawBullsEye)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(target.position + (Vector3)missOffset, missRadius);
+            Gizmos.DrawWireCube(target.position + (Vector3)missRegionOffset, missRegionSize);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(target.position + (Vector3)nearmissOffset, nearMissRadius);
+            Gizmos.DrawWireCube(target.position + (Vector3)nearMissRegionOffset, nearMissRegionSize);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(target.position + (Vector3)hitOffSet, hitRadius);
+            Gizmos.DrawWireCube(target.position + (Vector3)hitRegionOffset, hitRegionSize);
             Gizmos.color = Color.magenta;
-            Gizmos.DrawWireCube(target.position + (Vector3)bufferOffset, hitBuffer);
+            Gizmos.DrawWireCube(target.position + (Vector3)bufferRegionOffset, hitBufferRegionSize);
         }
 
         //Visualizing hit reception possibilities.
@@ -112,21 +114,21 @@ public class RicochetTracer : MonoBehaviour
 
         //Receiving from right
         pathVector = Quaternion.AngleAxis(angleBundle.x, Vector3.up) * Vector3.forward;
-        DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetRadius);
+        DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetObjectRadius);
 
         //Receiving from left
         pathVector = Quaternion.AngleAxis(angleBundle.x, Vector3.down) * Vector3.forward;
-        DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetRadius);
+        DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetObjectRadius);
 
         //Receiving from up
         pathVector = Quaternion.AngleAxis(angleBundle.y, Vector3.left) * Vector3.forward;
-        DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetRadius);
+        DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetObjectRadius);
 
         if (angleBundle.z != 0)
         {
             //Receiving from down
             pathVector = Quaternion.AngleAxis(angleBundle.z, Vector3.right) * Vector3.forward;
-            DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetRadius);
+            DebugExtension.DebugCapsule(position, position + pathVector * length, drawColor, ricochetObjectRadius);
         }
     }
 
@@ -143,7 +145,7 @@ public class RicochetTracer : MonoBehaviour
         }
         for (int i = 0; i < path.hitPositions.Count - 1; i++)
         {
-            DebugExtension.DrawCapsule(path.hitPositions[i], path.hitPositions[i + 1], getDrawingColor(path.mode), ricochetRadius);
+            DebugExtension.DrawCapsule(path.hitPositions[i], path.hitPositions[i + 1], getDrawingColor(path.mode), ricochetObjectRadius);
         }
     }
 
@@ -174,17 +176,17 @@ public class RicochetTracer : MonoBehaviour
     //Using rects Makes Calculation easier
     void initializeRects()
     {
-        missRect = new Rect(Vector2.zero, missRadius);
-        missRect.center = target.position + (Vector3)missOffset;
+        missRect = new Rect(Vector2.zero, missRegionSize);
+        missRect.center = target.position + (Vector3)missRegionOffset;
 
-        nearMissRect = new Rect(Vector2.zero, nearMissRadius);
-        nearMissRect.center = target.position + (Vector3)nearmissOffset;
+        nearMissRect = new Rect(Vector2.zero, nearMissRegionSize);
+        nearMissRect.center = target.position + (Vector3)nearMissRegionOffset;
 
-        bufferRect = new Rect(Vector2.zero, hitBuffer);
-        bufferRect.center = target.position + (Vector3)bufferOffset;
+        bufferRect = new Rect(Vector2.zero, hitBufferRegionSize);
+        bufferRect.center = target.position + (Vector3)bufferRegionOffset;
 
-        hitRect = new Rect(Vector2.zero, hitRadius);
-        hitRect.center = target.position + (Vector3)hitOffSet;
+        hitRect = new Rect(Vector2.zero, hitRegionSize);
+        hitRect.center = target.position + (Vector3)hitRegionOffset;
     }
 
     Vector3 getAngleBundle(rickochetMode mode)
@@ -192,11 +194,11 @@ public class RicochetTracer : MonoBehaviour
         switch (mode)
         {
             case rickochetMode.hit:
-                return maxHitAngle;
+                return maxHitAngles;
             case rickochetMode.nearmiss:
-                return maxNearMissAngle;
+                return maxNearMissAngles;
             case rickochetMode.miss:
-                return maxMissAngle;
+                return maxMissAngles;
             default:
                 return Vector3.zero;
         }
@@ -218,10 +220,10 @@ public class RicochetTracer : MonoBehaviour
         RaycastHit hitResults = new RaycastHit();
         for (int i = 0; i < maxNumberOfBounces; i++)
         {
-            Physics.SphereCast(startingPoint, ricochetRadius, launchVector.normalized, out hitResults, maxRicoshetLenth, interactingLayers, QueryTriggerInteraction.Ignore);
+            Physics.SphereCast(startingPoint, ricochetObjectRadius, launchVector.normalized, out hitResults, maxPathSegmentLength, interactingLayers, QueryTriggerInteraction.Ignore);
             if (hitResults.collider == null) //Nothing was hit...
             {
-                path.hitPositions.Add(startingPoint + launchVector * maxRicoshetLenth);
+                path.hitPositions.Add(startingPoint + launchVector * maxPathSegmentLength);
                 break;
             }
             else

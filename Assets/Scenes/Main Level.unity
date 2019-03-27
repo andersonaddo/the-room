@@ -11881,8 +11881,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1727217878}
-  - component: {fileID: 1727217879}
   - component: {fileID: 1727217880}
+  - component: {fileID: 1727217879}
   - component: {fileID: 1727217881}
   m_Layer: 0
   m_Name: Shooting Info Holder
@@ -11917,7 +11917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86311be0eee45cf4d92bee61b2a77427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldDraw: 1
+  shouldDraw: 0
   player: {fileID: 1299377133}
   shooterCubeMinRad: {x: 2, y: 1}
   shooterCubeMaxRad: {x: 5, y: 4}
@@ -11936,8 +11936,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f16331002c4294e9073d0767883377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: This has been separated from the shooting source so that it can be moved
+  Notes: 'This has been separated from the shooting source so that it can be moved
     around freely for Scene View Visualization
+
+
+    Corruption Shooting Info Debugging
+
+    --------------------------------------------------
+
+    Yellow ring - area xy in which shooting cubes may rest
+
+    Green Line - the z region where shooting cubes may rest
+
+    Purple Line - Buffer between shooting source and green line
+
+
+
+    Ricochet Tracer
+
+    --------------------------------------------------
+
+    This is the class that calculates ricochet paths for bouncing cubes
+
+
+    Bullseye - red = hit region, purple = buffer region between hit and nearmiss,
+    green is safe miss
+
+    Reception angles - visualizing these will show you the maximum angles at which
+    the bouncing cubes may enter the bulleye for the respective regions. NOTE THAT
+    VISUALIZING THIS IS EXPENSIVE FOR THE SCENE VIEW
+
+    Should visualize paths - this displays a oath generated just for viewing in the
+    editor.'
 --- !u!114 &1727217881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11951,26 +11981,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2060529480}
-  ricochetRadius: 0.3
+  ricochetObjectRadius: 0.3
   interactingLayers:
     serializedVersion: 2
     m_Bits: 823
-  maxRicoshetLenth: 80
+  maxPathSegmentLength: 100
   maxNumberofBounces: 10
-  editorRicochetMode: 2
-  hitRadius: {x: 1.85, y: 2.04}
-  hitOffSet: {x: 0, y: -0.62}
-  nearMissRadius: {x: 8.12, y: 4.9}
-  nearmissOffset: {x: 0, y: 0.84}
-  missRadius: {x: 15.25, y: 8.54}
-  missOffset: {x: 0, y: 4.34}
-  hitBuffer: {x: 3.06, y: 3.43}
-  bufferOffset: {x: 0, y: 0.01}
-  maxHitAngle: {x: 21.74, y: 16.07, z: 0}
-  maxNearMissAngle: {x: 31.03, y: 44.49, z: 0}
-  maxMissAngle: {x: 54.89, y: 40.5, z: 23.32}
+  editorRicochetMode: 0
+  hitRegionSize: {x: 1.85, y: 2.04}
+  hitRegionOffset: {x: 0, y: -0.62}
+  nearMissRegionSize: {x: 8.12, y: 4.9}
+  nearMissRegionOffset: {x: 0, y: 0.84}
+  missRegionSize: {x: 15.25, y: 8.54}
+  missRegionOffset: {x: 0, y: 4.34}
+  hitBufferRegionSize: {x: 3.06, y: 3.43}
+  bufferRegionOffset: {x: 0, y: 0.01}
+  maxHitAngles: {x: 21.74, y: 16.07, z: 0}
+  maxNearMissAngles: {x: 31.03, y: 44.49, z: 0}
+  maxMissAngles: {x: 54.89, y: 40.5, z: 23.32}
   shouldDrawBullsEye: 1
-  shouldVisualizeReceptionAngles: 1
+  shouldVisualizeReceptionAngles: 0
   shouldVisualizePaths: 1
 --- !u!4 &1737405610 stripped
 Transform:
