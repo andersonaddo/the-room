@@ -11883,6 +11883,7 @@ GameObject:
   - component: {fileID: 1727217878}
   - component: {fileID: 1727217879}
   - component: {fileID: 1727217880}
+  - component: {fileID: 1727217881}
   m_Layer: 0
   m_Name: Shooting Info Holder
   m_TagString: Untagged
@@ -11935,8 +11936,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f16331002c4294e9073d0767883377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: This has been separated from the shooting source so that it cam be moved
+  Notes: This has been separated from the shooting source so that it can be moved
     around freely for Scene View Visualization
+--- !u!114 &1727217881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727217877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7564dd22bdf454885b40f58db0ef56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2060529480}
+  ricochetRadius: 0.3
+  interactingLayers:
+    serializedVersion: 2
+    m_Bits: 823
+  maxRicoshetLenth: 80
+  maxNumberofBounces: 10
+  editorRicochetMode: 2
+  hitRadius: {x: 1.85, y: 2.04}
+  hitOffSet: {x: 0, y: -0.62}
+  nearMissRadius: {x: 8.12, y: 4.9}
+  nearmissOffset: {x: 0, y: 0.84}
+  missRadius: {x: 15.25, y: 8.54}
+  missOffset: {x: 0, y: 4.34}
+  hitBuffer: {x: 3.06, y: 3.43}
+  bufferOffset: {x: 0, y: 0.01}
+  maxHitAngle: {x: 21.74, y: 16.07, z: 0}
+  maxNearMissAngle: {x: 31.03, y: 44.49, z: 0}
+  maxMissAngle: {x: 54.89, y: 40.5, z: 23.32}
+  shouldDrawBullsEye: 1
+  shouldVisualizeReceptionAngles: 1
+  shouldVisualizePaths: 1
 --- !u!4 &1737405610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7170970412156531798, guid: f08d420ed217f394d91256bc232fa073,
@@ -15317,16 +15352,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4436190759706681805, guid: b3fba6f6bfb613a4490ae2acf77800a7,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
+    - target: {fileID: 1280460253, guid: b3fba6f6bfb613a4490ae2acf77800a7, type: 3}
+      propertyPath: weight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3fba6f6bfb613a4490ae2acf77800a7, type: 3}
 --- !u!20 &2060529479 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 282840813, guid: b3fba6f6bfb613a4490ae2acf77800a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2060529478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2060529480 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1038204575, guid: b3fba6f6bfb613a4490ae2acf77800a7,
     type: 3}
   m_PrefabInstance: {fileID: 2060529478}
   m_PrefabAsset: {fileID: 0}
