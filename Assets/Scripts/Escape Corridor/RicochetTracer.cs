@@ -11,28 +11,32 @@ public class RicochetTracer : MonoBehaviour
         miss
     }
 
-    public Transform target;
-    public float ricochetObjectRadius;
-    public LayerMask interactingLayers;
-    public float maxPathSegmentLength;
-    public int maxNumberofBounces;
-    public rickochetMode editorRicochetMode;
+    [SerializeField] Transform target;
+    [SerializeField] float ricochetObjectRadius;
+    [SerializeField] LayerMask interactingLayers;
+    [SerializeField] string destinationLayer;
+    [SerializeField] float maxPathSegmentLength;
+    [SerializeField] int maxNumberofBounces;
 
+    [SerializeField] rickochetMode editorRicochetMode;
     RicochetPath editorRicochetPath;
 
-    public Vector2 hitRegionSize, hitRegionOffset;
-    public Vector2 nearMissRegionSize, nearMissRegionOffset;
-    public Vector2 missRegionSize, missRegionOffset;
-    [Tooltip("Buffer between the hit area and the nearmiss area to prevent boxes destined to land near the edges ")]
-    public Vector2 hitBufferRegionSize, bufferRegionOffset;
+    [SerializeField] Vector2 hitRegionSize, hitRegionOffset;
+    [SerializeField] Vector2 nearMissRegionSize, nearMissRegionOffset;
+    [SerializeField] Vector2 missRegionSize, missRegionOffset;
+    [Tooltip("Buffer between the hit area and the nearmiss area to prevent nearmiss boxes coming too close to hit area")]
+    [SerializeField]
+    Vector2 hitBufferRegionSize, bufferRegionOffset;
 
     Rect missRect, nearMissRect, bufferRect, hitRect;
 
     [Tooltip("x = x direction, y = positive y direction, z (if not 0) represents negative y direction. None of these should be negative")]
-    public Vector3 maxHitAngles, maxNearMissAngles, maxMissAngles;
+    [SerializeField]
+    Vector3 maxHitAngles, maxNearMissAngles, maxMissAngles;
 
     public bool shouldDrawBullsEye;
-    [Tooltip("This is expensive, so it'll show down the Scene View noticeably")]public bool shouldVisualizeReceptionAngles;
+    [Tooltip("This is expensive, so it'll show down the Scene View noticeably")]
+    public bool shouldVisualizeReceptionAngles;
     public bool shouldVisualizePaths;
 
 
@@ -225,8 +229,12 @@ public class RicochetTracer : MonoBehaviour
             {
                 path.hitPositions.Add(startingPoint + launchVector * maxPathSegmentLength);
                 break;
+            }else if (hitResults.collider.gameObject.layer == LayerMask.NameToLayer(destinationLayer)){ //Found where it was supposed to go! End here
+                path.hitPositions.Add(hitResults.point);
+                path.reachedDestination = transform;
+                break;
             }
-            else
+            else //Just hit a bouncing surface
             {
                 path.bounces++;
                 path.hitPositions.Add(hitResults.point);
@@ -301,4 +309,5 @@ public class RicochetPath
     public RicochetTracer.rickochetMode mode;
     public int bounces;
     public List<Vector3> hitPositions = new List<Vector3>();
+    public bool reachedDestination;
 }
