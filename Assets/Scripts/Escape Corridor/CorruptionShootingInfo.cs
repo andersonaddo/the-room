@@ -49,7 +49,7 @@ public class CorruptionShootingInfo : MonoBehaviour
         return limitaions;
     }
 
-    public Vector3 RandomPointBetweenShhooterCubeEclipses()
+    public Vector3 RandomPointBetweenShooterCubeEclipses()
     {
         Vector3 point = Vector3.zero;
         point.x = Mathf.Sin(Mathf.Deg2Rad * Random.Range(0, 360)) * Random.Range(shooterCubeMinRad.x, shooterCubeMaxRad.x);

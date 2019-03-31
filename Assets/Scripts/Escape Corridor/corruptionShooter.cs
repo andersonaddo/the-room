@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class corruptionShooter : MonoBehaviour
 {
-    public GameObject shooterCube;
+    public GameObject shooterCube, ricochetCube;
     public Transform player;
     CorruptionShootingInfo shootingInfo;
 
     void Start()
     {
         shootingInfo = GetComponentInChildren<CorruptionShootingInfo>();
-        launchShooterCube();
-        launchShooterCube();
-        launchShooterCube();
-        launchShooterCube();
-        launchShooterCube();
-
+        launchRichochetCube(RicochetTracer.ricochetMode.hit);
+        launchRichochetCube(RicochetTracer.ricochetMode.nearmiss);
+        launchRichochetCube(RicochetTracer.ricochetMode.miss);
     }
 
 
@@ -30,11 +27,19 @@ public class corruptionShooter : MonoBehaviour
             Random.Range(zLimitations.x, zLimitations.y)
         );
 
-        cubeDestination += shootingInfo.RandomPointBetweenShhooterCubeEclipses();
+        cubeDestination += shootingInfo.RandomPointBetweenShooterCubeEclipses();
 
         cube.GetComponent<corruptionShooterCube>().launch(
             cubeDestination,
             player,
             difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.shooterCubeLaunchSpeed));
+    }
+
+    void launchRichochetCube(RicochetTracer.ricochetMode mode)
+    {
+        RicochetPath path = GetComponentInChildren<RicochetTracer>().GenerateSeccessfulPath(mode);
+        if (!path.isSuccessful) return;
+        GameObject cube = Instantiate(ricochetCube, transform.parent.position, Quaternion.identity);
+        cube.GetComponent<ricochetCube>().setPath(path);
     }
 }

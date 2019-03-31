@@ -7679,6 +7679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooterCube: {fileID: 1332670759638675747, guid: e3f23bdf9dd96a44a992cbec6796efa9,
     type: 3}
+  ricochetCube: {fileID: 1572039972880748707, guid: b9165f91c1e9f134391240185625eebe,
+    type: 3}
   player: {fileID: 1299377133}
 --- !u!1 &1548582686
 GameObject:
@@ -11995,14 +11997,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2060529480}
-  ricochetObjectRadius: 0.3
+  _ricochetObjectRadius: 0.5
   interactingLayers:
     serializedVersion: 2
     m_Bits: 66359
   destinationLayer: Creeping Corruption
   maxPathSegmentLength: 100
   maxNumberofBounces: 10
-  editorRicochetMode: 1
+  editorRicochetMode: 2
   hitRegionSize: {x: 1.85, y: 2.04}
   hitRegionOffset: {x: 0, y: -0.62}
   nearMissRegionSize: {x: 8.12, y: 4.9}
@@ -12014,9 +12016,9 @@ MonoBehaviour:
   maxHitAngles: {x: 21.74, y: 16.07, z: 0}
   maxNearMissAngles: {x: 31.03, y: 44.49, z: 0}
   maxMissAngles: {x: 54.89, y: 40.5, z: 23.32}
-  shouldDrawBullsEye: 1
+  shouldDrawBullsEye: 0
   shouldVisualizeReceptionAngles: 0
-  shouldVisualizePaths: 1
+  shouldVisualizePaths: 0
 --- !u!4 &1737405610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7170970412156531798, guid: f08d420ed217f394d91256bc232fa073,
