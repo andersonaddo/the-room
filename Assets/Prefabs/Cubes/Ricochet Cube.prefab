@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 1572039972880748710}
   - component: {fileID: 1572039972880748709}
   - component: {fileID: 1572039972880748708}
-  m_Layer: 0
+  - component: {fileID: 7895168863697749553}
+  - component: {fileID: 3975660686643677435}
+  m_Layer: 11
   m_Name: Ricochet Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,8 +89,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572039972880748707}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -106,3 +108,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   rotationSpeed: 400
+  playerLayer: Player
+  damageOnHit: 15
+--- !u!108 &7895168863697749553
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572039972880748707}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 2
+  m_Color: {r: 1, g: 0, b: 0.9203696, a: 1}
+  m_Intensity: 0.48
+  m_Range: 4.45
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 1
+  m_Flare: {fileID: 0}
+  m_RenderMode: 2
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &3975660686643677435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572039972880748707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21479671d3c6a6a41a9d4fb8604597ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aliveTime: 7
+  startOnAwake: 1

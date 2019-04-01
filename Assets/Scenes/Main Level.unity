@@ -12004,10 +12004,10 @@ MonoBehaviour:
   destinationLayer: Creeping Corruption
   maxPathSegmentLength: 100
   maxNumberofBounces: 10
-  editorRicochetMode: 2
+  editorRicochetMode: 1
   hitRegionSize: {x: 1.85, y: 2.04}
   hitRegionOffset: {x: 0, y: -0.62}
-  nearMissRegionSize: {x: 8.12, y: 4.9}
+  nearMissRegionSize: {x: 5.35, y: 4.9}
   nearMissRegionOffset: {x: 0, y: 0.84}
   missRegionSize: {x: 15.25, y: 8.54}
   missRegionOffset: {x: 0, y: 4.34}
@@ -15160,7 +15160,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16696
+  m_Name: pb_Mesh16690
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -15397,10 +15397,6 @@ PrefabInstance:
     - target: {fileID: 1304255093963544311, guid: b3fba6f6bfb613a4490ae2acf77800a7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1280460253, guid: b3fba6f6bfb613a4490ae2acf77800a7, type: 3}
-      propertyPath: weight
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

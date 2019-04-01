@@ -14,18 +14,19 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
 
     public iTween.EaseType launchEaseType;
 
-    public float baseAngularVelocity, angularVectorChangeRate, angularChangeSpeed;
+    [SerializeField] float baseAngularVelocity, angularVectorChangeRate, angularChangeSpeed;
     Vector3 angularVector, ranndomVector;
     float nextAngularChangeTime;
 
     bool canShoot, hasShot;
-    public float shootChargeTime;
+    [SerializeField] float shootChargeTime;
     float currentShootProg;
     Image progImage;
 
     Transform target;
     LineRenderer laser;
-
+    [SerializeField] float laserSpeed, aliveTimeAfterHit;
+    [SerializeField] int damageOnHit;
 
     void Awake()
     {
@@ -43,7 +44,7 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         if (canShoot && !hasShot)
         {
             charge();
-            if (currentShootProg == shootChargeTime) shoot();
+            if (currentShootProg == shootChargeTime) StartCoroutine("shoot");
         }
 
     }
@@ -87,12 +88,27 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         progImage.fillAmount = currentShootProg / shootChargeTime;
     }
 
-    void shoot()
+    IEnumerator shoot()
     {
         laser = GetComponentInChildren<LineRenderer>();
         hasShot = true;
-        laser.SetPosition(1, (target.transform.position - laser.transform.position) / transform.localScale.x); //Assuming that the scale is uniform
         laser.enabled = true;
+
+        Vector3 laserTip = Vector3.zero; //Local Space
+        Vector3 targetPosition = (target.transform.position - laser.transform.position) / transform.localScale.x;
+
+        while (laserTip != targetPosition)
+        {
+            laserTip = Vector3.MoveTowards(laserTip, targetPosition, laserSpeed * Time.deltaTime);
+            laser.SetPosition(1, laserTip); //Assuming that the scale is uniform
+            yield return null;
+        }
+
+        //Laser has reached player now...
+        FindObjectOfType<playerDamager>().inflictDamage(damageOnHit);
+
+        Destroy(gameObject, aliveTimeAfterHit);
+
     }
 
     public void initialize() { /**Meh nothing here*/ }

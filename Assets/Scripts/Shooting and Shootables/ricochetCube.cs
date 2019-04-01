@@ -16,6 +16,10 @@ public class ricochetCube : MonoBehaviour, IShootableCube
     public float speed, rotationSpeed;
     Vector3 rotationVector;
 
+    bool hasDamagedPlayer;
+    [SerializeField] string playerLayer;
+    [SerializeField] int damageOnHit;
+
     void Awake()
     {
         rotationVector = UnityEngine.Random.onUnitSphere * rotationSpeed;
@@ -25,6 +29,18 @@ public class ricochetCube : MonoBehaviour, IShootableCube
     {
         rotate();
         followPath();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer(playerLayer))
+        {
+            //Since the cubeis rotating all over the place
+            //it may be possible that an edge could ennter and exit the player collider before the whole cube does
+            if (hasDamagedPlayer) return;
+            hasDamagedPlayer = true;
+            other.GetComponentInParent<playerDamager>().inflictDamage(damageOnHit);
+        }
     }
 
     void rotate()

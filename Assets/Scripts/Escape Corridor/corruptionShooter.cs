@@ -11,9 +11,8 @@ public class corruptionShooter : MonoBehaviour
     void Start()
     {
         shootingInfo = GetComponentInChildren<CorruptionShootingInfo>();
-        launchRichochetCube(RicochetTracer.ricochetMode.hit);
         launchRichochetCube(RicochetTracer.ricochetMode.nearmiss);
-        launchRichochetCube(RicochetTracer.ricochetMode.miss);
+        launchShooterCube();
     }
 
 
