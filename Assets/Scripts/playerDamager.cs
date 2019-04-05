@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using EZCameraShake;
 
 public class playerDamager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class playerDamager : MonoBehaviour
     [SerializeField] float restorationSpeed;
     float currentCurveX;
     [SerializeField] AnimationCurve restorationCurve;
+
+    [SerializeField] float shakeMag, shakeRoughness, shakeFadeIn, shakeFadeOut;
 
     float currentHealth;
 
@@ -31,5 +34,6 @@ public class playerDamager : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         damagePP.weight = 1;
         currentCurveX = 1;
+        CameraShaker.Instance.ShakeOnce(shakeMag, shakeRoughness, shakeFadeIn, shakeFadeOut);
     }
 }

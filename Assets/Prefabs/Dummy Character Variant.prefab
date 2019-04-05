@@ -178,8 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f16331002c4294e9073d0767883377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: GvrPointerPhysicsRaycase needed to allow mr VR pointer (check this camera's
+  Notes: 'GvrPointerPhysicsRaycaser needed to allow my VR pointer (check this camera''s
     child) to work for 3D objects.
+
+'
 --- !u!114 &282840816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,8 +207,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1038204575}
+  - component: {fileID: 1497306552}
+  - component: {fileID: 1497306553}
   m_Layer: 0
-  m_Name: Camera Parent
+  m_Name: Camera Parent - Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,14 +223,42 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038204574}
-  m_LocalRotation: {x: -0, y: 0.0000004172325, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 282840814}
-  m_Father: {fileID: 1304255093963544311}
-  m_RootOrder: 2
+  m_Father: {fileID: 5726348511912696415}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
+--- !u!114 &1497306552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038204574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f16331002c4294e9073d0767883377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Notes: This parents the camera because the gun pointer manually positions the camera
+    to 0,0,0
+--- !u!114 &1497306553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038204574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
+  DefaultRotInfluence: {x: 0, y: 0, z: 0}
 --- !u!1 &1186750410
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +270,6 @@ GameObject:
   - component: {fileID: 1186750411}
   - component: {fileID: 1186750413}
   - component: {fileID: 1186750412}
-  - component: {fileID: 1186750414}
   m_Layer: 0
   m_Name: Gun Raycast Pointer
   m_TagString: Untagged
@@ -295,22 +326,6 @@ MonoBehaviour:
 
 
     It gets events from the GvrPointerInputModule in the scene.'
---- !u!114 &1186750414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186750410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb5dd43baba2d4dc1bab789615567e3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycasterEventMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxRaycastHits: 64
 --- !u!1 &1297613492
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,44 +426,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.15774912
-      value: 0.39218634
-      inSlope: 2.3831644
-      outSlope: 2.3831644
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.20074335
-      outWeight: 0.13854292
-    - serializedVersion: 3
-      time: 0.27895787
-      value: 0.73963785
-      inSlope: 2.268304
-      outSlope: 2.268304
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.44011062
-      outWeight: 0.2030065
-    - serializedVersion: 3
-      time: 0.41500416
-      value: 0.96152836
-      inSlope: 0.22743016
-      outSlope: 0.22743016
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
       time: 1
-      value: 1.0032043
-      inSlope: 0
-      outSlope: 0
+      value: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -456,6 +444,58 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  shakeMag: 2
+  shakeRoughness: 15
+  shakeFadeIn: 0
+  shakeFadeOut: 1
+--- !u!1 &2883522617444628169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5726348511912696415}
+  - component: {fileID: 2060529482}
+  m_Layer: 0
+  m_Name: Camera Parent - Shaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5726348511912696415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2883522617444628169}
+  m_LocalRotation: {x: -0, y: 0.0000004172325, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1038204575}
+  m_Father: {fileID: 1304255093963544311}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060529482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2883522617444628169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f16331002c4294e9073d0767883377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Notes: 'This is parenting "Camera Parent - Pointer" to enable camera shaking. Check
+    the README of "Camera Parent - Pointer"
+
+'
 --- !u!1 &5946685328389217169
 GameObject:
   m_ObjectHideFlags: 0
