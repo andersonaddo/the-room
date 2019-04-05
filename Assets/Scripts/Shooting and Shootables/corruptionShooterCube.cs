@@ -14,14 +14,15 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
 
     public iTween.EaseType launchEaseType;
 
+    //The cube's rotational properties change over time for aethetic value
     [SerializeField] float baseAngularVelocity, angularVectorChangeRate, angularChangeSpeed;
-    Vector3 angularVector, ranndomVector;
+    Vector3 currentAngularVector, randomAngularVectorTarget;
     float nextAngularChangeTime;
 
     bool canShoot, hasShot;
     [SerializeField] float shootChargeTime;
-    float currentShootProg;
-    Image progImage;
+    float currentShootProgress;
+    Image progressLoader;
 
     Transform target;
     LineRenderer laser;
@@ -30,11 +31,11 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
 
     void Awake()
     {
-        angularVector = Random.onUnitSphere;
-        ranndomVector = Random.onUnitSphere;
+        currentAngularVector = Random.onUnitSphere;
+        randomAngularVectorTarget = Random.onUnitSphere;
         nextAngularChangeTime = Time.time + angularVectorChangeRate;
 
-        progImage = GetComponentInChildren<Image>();
+        progressLoader = GetComponentInChildren<Image>();
     }
 
     void Update()
@@ -44,7 +45,7 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         if (canShoot && !hasShot)
         {
             charge();
-            if (currentShootProg == shootChargeTime) StartCoroutine("shoot");
+            if (currentShootProgress == shootChargeTime) StartCoroutine("shoot");
         }
 
     }
@@ -66,26 +67,26 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
 
     public void onShot(Vector3 shotPosition, damageEffectors damageEffector)
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 
 
     void rotate()
     {
-        transform.Rotate(angularVector * baseAngularVelocity * Time.deltaTime);
-        angularVector = Vector3.MoveTowards(angularVector, ranndomVector, angularChangeSpeed * Time.deltaTime).normalized;
+        transform.Rotate(currentAngularVector * baseAngularVelocity * Time.deltaTime);
+        currentAngularVector = Vector3.MoveTowards(currentAngularVector, randomAngularVectorTarget, angularChangeSpeed * Time.deltaTime).normalized;
 
         if (Time.time >= nextAngularChangeTime)
         {
-            ranndomVector = Random.onUnitSphere;
+            randomAngularVectorTarget = Random.onUnitSphere;
             nextAngularChangeTime = Time.time + angularVectorChangeRate;
         }
     }
 
     void charge()
     {
-        currentShootProg = Mathf.MoveTowards(currentShootProg, shootChargeTime, Time.deltaTime);
-        progImage.fillAmount = currentShootProg / shootChargeTime;
+        currentShootProgress = Mathf.MoveTowards(currentShootProgress, shootChargeTime, Time.deltaTime);
+        progressLoader.fillAmount = currentShootProgress / shootChargeTime;
     }
 
     IEnumerator shoot()

@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class ricochetCube : MonoBehaviour, IShootableCube
 {
+    [SerializeField] cubeTypes _type;
     public cubeTypes type
     {
         get
         {
-            throw new System.NotImplementedException();
+            return _type;
         }
     }
 
-    RicochetPath path;
-    int destinationPointIndex;
-    public float speed, rotationSpeed;
+    RicochetPath path; //Set externally when the cube is created
+    int destinationPointIndex; //Index of the point in the cube's path it is currently moving to
+    [SerializeField] float rotationSpeed;
+    float speed;
     Vector3 rotationVector;
 
     bool hasDamagedPlayer;
@@ -23,6 +25,7 @@ public class ricochetCube : MonoBehaviour, IShootableCube
     void Awake()
     {
         rotationVector = UnityEngine.Random.onUnitSphere * rotationSpeed;
+        speed =  difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.richochetCubeSpeed);
     }
 
     void Update()
@@ -33,10 +36,11 @@ public class ricochetCube : MonoBehaviour, IShootableCube
 
     void OnTriggerEnter(Collider other)
     {
+        if (path.mode != RicochetTracer.ricochetMode.hit) return; //You were never meant to hit the player in the first place. The buffer region in the player bullseye should have prevented this actually.
         if (other.gameObject.layer == LayerMask.NameToLayer(playerLayer))
         {
-            //Since the cubeis rotating all over the place
-            //it may be possible that an edge could ennter and exit the player collider before the whole cube does
+            //Since the cube is rotating all over the place
+            //it may be possible that an edge could enter and exit the player's collider before the whole cube does (meaning ontriggerenter gets called twice)
             if (hasDamagedPlayer) return;
             hasDamagedPlayer = true;
             other.GetComponentInParent<playerDamager>().inflictDamage(damageOnHit);
@@ -51,6 +55,7 @@ public class ricochetCube : MonoBehaviour, IShootableCube
     private void followPath()
     {
         if (path == null) return;
+
         if (destinationPointIndex != -1) { //Hasn't reached the last point yet...
             transform.position = Vector3.MoveTowards(transform.position, path.ricochetPositions[destinationPointIndex], speed * Time.deltaTime);
             if (transform.position == path.ricochetPositions[destinationPointIndex])
@@ -67,6 +72,7 @@ public class ricochetCube : MonoBehaviour, IShootableCube
 
     }
 
+    //Called externally when the cube is created
     public void setPath(RicochetPath path)
     {
         this.path = path;
@@ -74,7 +80,7 @@ public class ricochetCube : MonoBehaviour, IShootableCube
         positionForFollowing();
     }
 
-    //Places the cube just behind the first point in the path at the right angle
+    //Places the cube just behind the first point in the path at the appropriate trajectory
     void positionForFollowing()
     {
         Vector3 firstSegmentVector = path.ricochetPositions[path.ricochetPositions.Count - 2] -  path.ricochetPositions[path.ricochetPositions.Count - 1];
@@ -83,12 +89,12 @@ public class ricochetCube : MonoBehaviour, IShootableCube
 
     public void initialize()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void onShot(Vector3 shotPosition, damageEffectors damageEffector)
     {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 
 }

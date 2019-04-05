@@ -7677,11 +7677,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897dbc3d4a3c58f46a6d8036e80d3948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1299377133}
   shooterCube: {fileID: 1332670759638675747, guid: e3f23bdf9dd96a44a992cbec6796efa9,
     type: 3}
   ricochetCube: {fileID: 1572039972880748707, guid: b9165f91c1e9f134391240185625eebe,
     type: 3}
-  player: {fileID: 1299377133}
+  shooterCubeWaitTimeMin: 1
+  shooterCubeWaitTimeMax: 2
+  richochetCubeWaitTimeMin: 2
+  richochetCubeWaitTimeMax: 3
+  ricochetHitChance: 50
+  ricochetNearmissChance: 60
+  earlyCubeChance: 30
 --- !u!1 &1548582686
 GameObject:
   m_ObjectHideFlags: 0
@@ -7893,6 +7900,30 @@ MonoBehaviour:
       value: -60
       inSlope: -60
       outSlope: -60
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  richochetCubeSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 15
+      inSlope: 10
+      outSlope: 10
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 25
+      inSlope: 10
+      outSlope: 10
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -11937,8 +11968,8 @@ MonoBehaviour:
   player: {fileID: 1299377133}
   shooterCubeMinRad: {x: 2, y: 1}
   shooterCubeMaxRad: {x: 5, y: 4}
-  shooterCubeMinDistance: 5
-  shooterCubeMaxDistance: 40
+  shooterCubeMinDistance: 7
+  shooterCubeMaxDistance: 55
   shooterSourceBuffer: 5
 --- !u!114 &1727217880
 MonoBehaviour:
@@ -11997,7 +12028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2060529480}
-  _ricochetObjectRadius: 0.5
+  _ricochetObjectRadius: 0.75
   interactingLayers:
     serializedVersion: 2
     m_Bits: 66359

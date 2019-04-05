@@ -10,7 +10,7 @@ public class difficultyCurveHolder : MonoBehaviour
 
     //For the escape corridor
     [CurveColor(CurveColorAttribute.availableCurveColors.cyan)]
-    public AnimationCurve shooterCubeLaunchSpeed, corruptionDeltaZ;
+    public AnimationCurve shooterCubeLaunchSpeed, corruptionDeltaZ, richochetCubeSpeed;
 
     public static difficultyCurveHolder Instance;
 

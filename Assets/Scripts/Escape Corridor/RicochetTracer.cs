@@ -173,7 +173,7 @@ public class RicochetTracer : MonoBehaviour
 
     public void setEditorPath()
     {
-        editorRicochetPath = GenerateSeccessfulPath(editorRicochetMode);
+        editorRicochetPath = GenerateSuccessfulPath(editorRicochetMode);
     }
 
     Color getDrawingColor(ricochetMode mode)
@@ -218,7 +218,7 @@ public class RicochetTracer : MonoBehaviour
     /// </summary>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public RicochetPath GenerateSeccessfulPath(ricochetMode mode)
+    public RicochetPath GenerateSuccessfulPath(ricochetMode mode)
     {
         RicochetPath path = new RicochetPath();
         path.mode = mode;
