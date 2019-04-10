@@ -112,6 +112,4 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         Destroy(gameObject, aliveTimeAfterHit);
 
     }
-
-    public void initialize() { /**Meh nothing here*/ }
 }

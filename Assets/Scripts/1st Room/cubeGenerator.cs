@@ -40,7 +40,7 @@ public class cubeGenerator : MonoBehaviour {
             cube.transform.position = spawnPoint;
             cube.transform.rotation = Quaternion.identity;
             cube.GetComponent<Rigidbody>().velocity = calculateVelocityVector(speed);
-            cube.GetComponent<IShootableCube>().initialize();
+            cube.GetComponent<GenericShootableCube>().initialize();
         }
     }	
 

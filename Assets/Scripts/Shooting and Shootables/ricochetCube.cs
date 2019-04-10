@@ -89,11 +89,6 @@ public class ricochetCube : MonoBehaviour, IShootableCube
         transform.position = path.ricochetPositions[path.ricochetPositions.Count - 1] - firstSegmentVector.normalized;
     }
 
-    public void initialize()
-    {
-        
-    }
-
     public void onShot(Vector3 shotPosition, damageEffectors damageEffector)
     {
         Destroy(gameObject);
