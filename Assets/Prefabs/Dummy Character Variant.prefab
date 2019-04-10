@@ -417,9 +417,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce930ebe21c47e64db5a0177454d908b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 500
   damagePP: {fileID: 1486344215816726887}
-  restorationSpeed: 0.5
+  restorationSpeed: 0.7
   restorationCurve:
     serializedVersion: 2
     m_Curve:
@@ -433,10 +433,28 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 0.4100059
+      value: 0.20325696
+      inSlope: 0.95685256
+      outSlope: 0.95685256
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7792629
+      value: 0.862179
       inSlope: 2
       outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -444,10 +462,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeMag: 2
-  shakeRoughness: 15
   shakeFadeIn: 0
-  shakeFadeOut: 1
+  shakeFadeOut: 1.15
 --- !u!1 &2883522617444628169
 GameObject:
   m_ObjectHideFlags: 0

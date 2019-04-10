@@ -14,13 +14,15 @@ public class ricochetCube : MonoBehaviour, IShootableCube
 
     RicochetPath path; //Set externally when the cube is created
     int destinationPointIndex; //Index of the point in the cube's path it is currently moving to
-    [SerializeField] float rotationSpeed;
     float speed;
+
+    [SerializeField] float rotationSpeed;
     Vector3 rotationVector;
 
     bool hasDamagedPlayer;
     [SerializeField] string playerLayer;
     [SerializeField] int damageOnHit;
+    [Tooltip("X = shake magnitude, Y = shake roughness")] [SerializeField] Vector2 shake;
 
     void Awake()
     {
@@ -43,7 +45,7 @@ public class ricochetCube : MonoBehaviour, IShootableCube
             //it may be possible that an edge could enter and exit the player's collider before the whole cube does (meaning ontriggerenter gets called twice)
             if (hasDamagedPlayer) return;
             hasDamagedPlayer = true;
-            other.GetComponentInParent<playerDamager>().inflictDamage(damageOnHit);
+            other.GetComponentInParent<playerDamager>().inflictDamage(damageOnHit, shake);
         }
     }
 

@@ -9,14 +9,16 @@ public class playerDamager : MonoBehaviour
 {
 
     [SerializeField] float maxHealth;
+    float currentHealth;
+
+    public static event Action<float> playerDamaged;
+
     [SerializeField] PostProcessVolume damagePP;
     [SerializeField] float restorationSpeed;
-    float currentCurveX;
     [SerializeField] AnimationCurve restorationCurve;
+    float currentCurveX;
 
-    [SerializeField] float shakeMag, shakeRoughness, shakeFadeIn, shakeFadeOut;
-
-    float currentHealth;
+    [SerializeField] float shakeFadeIn, shakeFadeOut;
 
     void Start()
     {
@@ -29,11 +31,17 @@ public class playerDamager : MonoBehaviour
         damagePP.weight = restorationCurve.Evaluate(currentCurveX);
     }
 
-    public void inflictDamage(int damage)
+    /// <summary>
+    /// Inflict damage onto the player
+    /// </summary>
+    /// <param name="damage">The amount of damage to inflict</param>
+    /// <param name="shakeInformation">x represents shake magnitude, y shake roughness</param>
+    public void inflictDamage(int damage, Vector2 shakeInformation)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         damagePP.weight = 1;
         currentCurveX = 1;
-        CameraShaker.Instance.ShakeOnce(shakeMag, shakeRoughness, shakeFadeIn, shakeFadeOut);
+        CameraShaker.Instance.ShakeOnce(shakeInformation.x, shakeInformation.y, shakeFadeIn, shakeFadeOut);
+        if (playerDamaged != null) playerDamaged(currentHealth / maxHealth);
     }
 }

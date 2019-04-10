@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7895168863697749553}
   - component: {fileID: 3975660686643677435}
   - component: {fileID: 6938846827482528778}
-  m_Layer: 17
+  m_Layer: 11
   m_Name: Ricochet Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,7 @@ MonoBehaviour:
   rotationSpeed: 400
   playerLayer: Player
   damageOnHit: 15
+  shake: {x: 2, y: 15}
 --- !u!108 &7895168863697749553
 Light:
   m_ObjectHideFlags: 0

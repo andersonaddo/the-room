@@ -263,6 +263,7 @@ MonoBehaviour:
   laserSpeed: 100
   aliveTimeAfterHit: 2
   damageOnHit: 30
+  shake: {x: 3, y: 20}
 --- !u!1 &3803279803333909864
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,12 +22,13 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
     bool canShoot, hasShot;
     [SerializeField] float shootChargeTime;
     float currentShootProgress;
-    Image progressLoader;
+    Image progressDisplay;
 
     Transform target;
     LineRenderer laser;
     [SerializeField] float laserSpeed, aliveTimeAfterHit;
     [SerializeField] int damageOnHit;
+    [Tooltip("X = shake magnitude, Y = shake roughness")][SerializeField] Vector2 shake;
 
     void Awake()
     {
@@ -35,7 +36,7 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         randomAngularVectorTarget = Random.onUnitSphere;
         nextAngularChangeTime = Time.time + angularVectorChangeRate;
 
-        progressLoader = GetComponentInChildren<Image>();
+        progressDisplay = GetComponentInChildren<Image>();
     }
 
     void Update()
@@ -86,7 +87,7 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
     void charge()
     {
         currentShootProgress = Mathf.MoveTowards(currentShootProgress, shootChargeTime, Time.deltaTime);
-        progressLoader.fillAmount = currentShootProgress / shootChargeTime;
+        progressDisplay.fillAmount = currentShootProgress / shootChargeTime;
     }
 
     IEnumerator shoot()
@@ -106,7 +107,7 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         }
 
         //Laser has reached player now...
-        FindObjectOfType<playerDamager>().inflictDamage(damageOnHit);
+        FindObjectOfType<playerDamager>().inflictDamage(damageOnHit, shake);
 
         Destroy(gameObject, aliveTimeAfterHit);
 
