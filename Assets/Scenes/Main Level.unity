@@ -2095,20 +2095,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3839555456f033c44ba343b54be052b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStage: 1
   objectsToPool:
   - GO: {fileID: 1384288279754992, guid: e373fee6663effd4dacb7ea045ed1d5d, type: 3}
+    stageNeeded: 3
     nameToCall: bullet
     initialNumber: 5
   - GO: {fileID: 1671025194851476, guid: 5ea99b14926f5204b8e58d77241ab976, type: 3}
+    stageNeeded: 0
     nameToCall: brokencube
     initialNumber: 35
   - GO: {fileID: 1727738957010722, guid: 1906ae2f53f538e42a61b68431398cfe, type: 3}
+    stageNeeded: 0
     nameToCall: genericCube
     initialNumber: 35
   - GO: {fileID: 1556381349586856, guid: d23fe4a5be7877e41a5002517331ac6a, type: 3}
+    stageNeeded: 0
     nameToCall: megaCube
     initialNumber: 5
   - GO: {fileID: 1758051492591362, guid: ad015675c0d7af4458c151832630d21b, type: 3}
+    stageNeeded: 3
     nameToCall: bulletExplosion
     initialNumber: 10
 --- !u!4 &480172081
