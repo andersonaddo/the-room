@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ricochetCube : MonoBehaviour, IShootableCube
+public class ricochetCube : MonoBehaviour, IShootableCube, ISelfDestructInstructions
 {
     [SerializeField] cubeTypes _type;
     public cubeTypes type
@@ -24,10 +24,19 @@ public class ricochetCube : MonoBehaviour, IShootableCube
     [SerializeField] int damageOnHit;
     [Tooltip("X = shake magnitude, Y = shake roughness")] [SerializeField] Vector2 shake;
 
-    void Awake()
+    public void initialize(RicochetPath path)
     {
         rotationVector = UnityEngine.Random.onUnitSphere * rotationSpeed;
         speed =  difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.richochetCubeSpeed);
+        setPath(path);
+        GetComponent<timedSelfDestruct>().startTimer();
+    }
+
+    public void resetForPooling()
+    {
+        GetComponent<timedSelfDestruct>().cancel();
+        hasDamagedPlayer = false;
+        objectPooler.Instance.returnObject("ricochetCube", gameObject);
     }
 
     void Update()
@@ -38,6 +47,7 @@ public class ricochetCube : MonoBehaviour, IShootableCube
 
     void OnTriggerEnter(Collider other)
     {
+        if (!enabled) return;
         if (path.mode != RicochetTracer.ricochetMode.hit) return; //You were never meant to hit the player in the first place. The buffer region in the player bullseye should have prevented this actually.
         if (other.gameObject.layer == LayerMask.NameToLayer(playerLayer))
         {
@@ -74,8 +84,7 @@ public class ricochetCube : MonoBehaviour, IShootableCube
 
     }
 
-    //Called externally when the cube is created
-    public void setPath(RicochetPath path)
+    void setPath(RicochetPath path)
     {
         this.path = path;
         destinationPointIndex = path.ricochetPositions.Count - 1;
@@ -91,7 +100,11 @@ public class ricochetCube : MonoBehaviour, IShootableCube
 
     public void onShot(Vector3 shotPosition, damageEffectors damageEffector)
     {
-        Destroy(gameObject);
+        resetForPooling();
     }
 
+    public void selfDestruct()
+    {
+        resetForPooling();
+    }
 }

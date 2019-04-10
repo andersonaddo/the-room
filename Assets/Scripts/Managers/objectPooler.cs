@@ -32,6 +32,7 @@ public class objectPooler : MonoBehaviour
 
     void Awake()
     {
+        Instance = this;
         initializeStageDictionary();
         loadInPermanentObjects();
         loadInObjects(currentStage);        

@@ -1203,7 +1203,7 @@ SphereCollider:
   m_GameObject: {fileID: 208893907}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1.0865269
   m_Center: {x: 0, y: 0, z: -0.5865267}
@@ -2116,6 +2116,14 @@ MonoBehaviour:
   - GO: {fileID: 1758051492591362, guid: ad015675c0d7af4458c151832630d21b, type: 3}
     stageNeeded: 3
     nameToCall: bulletExplosion
+    initialNumber: 10
+  - GO: {fileID: 1572039972880748707, guid: b9165f91c1e9f134391240185625eebe, type: 3}
+    stageNeeded: 1
+    nameToCall: ricochetCube
+    initialNumber: 10
+  - GO: {fileID: 1332670759638675747, guid: e3f23bdf9dd96a44a992cbec6796efa9, type: 3}
+    stageNeeded: 1
+    nameToCall: shooterCube
     initialNumber: 10
 --- !u!4 &480172081
 Transform:

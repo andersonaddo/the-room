@@ -32,11 +32,26 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
 
     void Awake()
     {
+        progressDisplay = GetComponentInChildren<Image>();
+    }
+
+    public void initialize()
+    {
+        //Just re-randomizing thier rotation vectors
         currentAngularVector = Random.onUnitSphere;
         randomAngularVectorTarget = Random.onUnitSphere;
         nextAngularChangeTime = Time.time + angularVectorChangeRate;
+    }
 
-        progressDisplay = GetComponentInChildren<Image>();
+    void resetForPooling()
+    {
+        StopAllCoroutines();
+        canShoot = false;
+        hasShot = false;
+        currentShootProgress = 0;
+        progressDisplay.fillAmount = 0;
+        GetComponentInChildren<LineRenderer>().enabled = false;
+        objectPooler.Instance.returnObject("shooterCube", gameObject);
     }
 
     void Update()
@@ -68,7 +83,8 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
 
     public void onShot(Vector3 shotPosition, damageEffectors damageEffector)
     {
-        Destroy(gameObject);
+        CancelInvoke(); //Incase the cube was already about to reset itself since it was finished shooting...
+        resetForPooling();
     }
 
 
@@ -109,7 +125,6 @@ public class corruptionShooterCube : MonoBehaviour, IShootableCube
         //Laser has reached player now...
         FindObjectOfType<playerDamager>().inflictDamage(damageOnHit, shake);
 
-        Destroy(gameObject, aliveTimeAfterHit);
-
+        Invoke("resetForPooling", aliveTimeAfterHit);
     }
 }

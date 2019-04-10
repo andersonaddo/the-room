@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveTime: 14
-  startOnAwake: 1
+  startOnAwake: 0
 --- !u!114 &6938846827482528778
 MonoBehaviour:
   m_ObjectHideFlags: 0

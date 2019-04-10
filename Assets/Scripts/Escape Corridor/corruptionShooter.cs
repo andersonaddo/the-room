@@ -62,7 +62,8 @@ public class corruptionShooter : MonoBehaviour
 
     void launchShooterCube()
     {
-        GameObject cube = Instantiate(shooterCube, transform.parent.position, Quaternion.identity);
+        GameObject cube = objectPooler.Instance.requestObject("shooterCube");
+        cube.transform.position = transform.parent.position;
         Vector2 zLimitations = shootingInfoHolder.getZLimitations(transform.position, player);
         Vector3 cubeDestination = new Vector3(
             transform.position.x,
@@ -72,6 +73,7 @@ public class corruptionShooter : MonoBehaviour
 
         cubeDestination += shootingInfoHolder.RandomPointBetweenShooterCubeEclipses();
 
+        cube.GetComponent<corruptionShooterCube>().initialize();
         cube.GetComponent<corruptionShooterCube>().launch(
             cubeDestination,
             player,
@@ -82,7 +84,8 @@ public class corruptionShooter : MonoBehaviour
     {
         RicochetPath path = GetComponentInChildren<RicochetTracer>().GenerateSuccessfulPath(mode);
         if (!path.isSuccessful) return;
-        GameObject cube = Instantiate(ricochetCube, transform.parent.position, Quaternion.identity);
-        cube.GetComponent<ricochetCube>().setPath(path);
+        GameObject cube = objectPooler.Instance.requestObject("ricochetCube");
+        cube.transform.position = transform.parent.position;
+        cube.GetComponent<ricochetCube>().initialize(path);
     }
 }
