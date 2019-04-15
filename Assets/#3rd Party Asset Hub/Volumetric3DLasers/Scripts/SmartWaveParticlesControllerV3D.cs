@@ -9,7 +9,6 @@ public class SmartWaveParticlesControllerV3D : MonoBehaviour
     [SerializeField] ParticleSystem controlPS;
     [SerializeField] ParticleSystem distortionSpherePS;
     [SerializeField] AnimationCurve progressCurve;
-    [SerializeField] V3DLaserController controller;
 
     private float globalProgress;
     private Renderer[] renderers;
@@ -26,7 +25,6 @@ public class SmartWaveParticlesControllerV3D : MonoBehaviour
 
     void Update()
     {
-        SpawnWave();
         UpdateControlVariables();
         UpdateRenderers();
     }
@@ -64,13 +62,10 @@ public class SmartWaveParticlesControllerV3D : MonoBehaviour
         globalProgress = gp;
     }
 
-    // Spawn control particle and distortion sphere particle
+    //Called externally when laser shoots
     public void SpawnWave()
     {
-        if (controller.justStartedShooting)
-        {
-            distortionSpherePS.Emit(1);
-            controlPS.Emit(1);
-        }
+        distortionSpherePS.Emit(1);
+        controlPS.Emit(1);
     }
 }

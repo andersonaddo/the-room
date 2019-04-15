@@ -7,10 +7,7 @@ public class corruptionShooter : MonoBehaviour
     public Transform player;
     CorruptionShootingInfo shootingInfoHolder;
 
-    [SerializeField] GameObject shooterCube, ricochetCube;
-
-
-    [SerializeField] float shooterCubeWaitTimeMin, shooterCubeWaitTimeMax;
+    [SerializeField] float shooterDroneWaitTimeMin, shooterDroneWaitTimeMax;
     [SerializeField] float richochetCubeWaitTimeMin, richochetCubeWaitTimeMax;
 
     //The following values should all be out of 100
@@ -23,20 +20,20 @@ public class corruptionShooter : MonoBehaviour
     {
         shootingInfoHolder = GetComponentInChildren<CorruptionShootingInfo>();
         StartCoroutine("shootRicoshetCubes");
-        StartCoroutine("shootShooterCubes");
+        StartCoroutine("shootShooterDrones");
     }
 
-    IEnumerator shootShooterCubes()
+    IEnumerator shootShooterDrones()
     {
         while (canShoot)
         {
-            float timeToWait = Random.Range(shooterCubeWaitTimeMin, shooterCubeWaitTimeMax);
+            float timeToWait = Random.Range(shooterDroneWaitTimeMin, shooterDroneWaitTimeMax);
             if (Random.Range(1, 101) <= earlyCubeChance) timeToWait /= 2;
             yield return new WaitForSeconds(timeToWait);
 
             if (!canShoot) break; //In case something has happened while we were waiting
 
-            launchShooterCube();
+            launchShooterDrone();
         }
     }
 
@@ -60,9 +57,9 @@ public class corruptionShooter : MonoBehaviour
         }
     }
 
-    void launchShooterCube()
+    void launchShooterDrone()
     {
-        GameObject cube = objectPooler.Instance.requestObject("shooterCube");
+        GameObject cube = objectPooler.Instance.requestObject("shooterDrone");
         cube.transform.position = transform.parent.position;
         Vector2 zLimitations = shootingInfoHolder.getZLimitations(transform.position, player);
         Vector3 cubeDestination = new Vector3(
@@ -73,10 +70,9 @@ public class corruptionShooter : MonoBehaviour
 
         cubeDestination += shootingInfoHolder.RandomPointBetweenShooterCubeEclipses();
 
-        cube.GetComponent<corruptionShooterCube>().initialize();
-        cube.GetComponent<corruptionShooterCube>().launch(
+        cube.GetComponent<corruptionShooterDrone>().initialize(player);
+        cube.GetComponent<corruptionShooterDrone>().launch(
             cubeDestination,
-            player,
             difficultyCurveHolder.getCurrentValue(difficultyCurveHolder.Instance.shooterCubeLaunchSpeed));
     }
 
