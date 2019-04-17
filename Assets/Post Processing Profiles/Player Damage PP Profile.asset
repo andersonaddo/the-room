@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c756fe45ae37747864bbe1e991ae38, type: 3}
   m_Name: EdgeDetect_AfterStack
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1

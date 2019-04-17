@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -143,7 +143,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         displayExplosion();
         laser.stopShooting();
         droneTransform.gameObject.SetActive(false);
-        yield return new WaitForSeconds(shrinkTime);
+        yield return new WaitForSeconds(shrinkTime + 0.5f);
         resetForPooling();
     }
 
