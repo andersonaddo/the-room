@@ -22,9 +22,12 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
 
     bool canShoot, hasShot, hasBeenShot;
     [SerializeField] float shootChargeTime;
+
     float currentShootProgress;
     Image progressDisplay;
     GameObject countingCanvas;
+
+    Vector3 originalCanvasScale, originalDroneScale, originalDissapearPSScale;
 
     Transform target;
     MyV3DLaserController laser;
@@ -39,6 +42,10 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         laser = GetComponentInChildren<MyV3DLaserController>();
         progressDisplay = GetComponentInChildren<Image>();
         countingCanvas = GetComponentInChildren<Canvas>().gameObject;
+
+        originalCanvasScale = countingCanvas.transform.localScale;
+        originalDroneScale = droneTransform.localScale;
+        originalDissapearPSScale = dissappearPS.transform.localScale;
     }
 
     public void initialize(Transform target) //Called the right before launch
@@ -140,6 +147,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
     IEnumerator Explode()
     {
         hitBox.enabled = false; //Cannot be hit anymore
+        progressDisplay.enabled = false;
         displayExplosion();
         laser.stopShooting();
         droneTransform.gameObject.SetActive(false);
@@ -159,7 +167,13 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
     void resetForPooling()
     {
         StopAllCoroutines();
+
+        //The ScaleTo iTweens seem to stay a bit longer after they've finished, 
+        //and they can prevent me from rescaling my children to their original scales if they're not stopped
+        iTween.Stop(gameObject, true); 
+ 
         hitBox.enabled = true;
+        progressDisplay.enabled = true;
         explosionPS.SetActive(false);
         dissappearPS.SetActive(false);
         droneTransform.gameObject.SetActive(true);
@@ -172,9 +186,9 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         currentShootProgress = 0;
         progressDisplay.fillAmount = 0;
 
-        droneTransform.localScale = Vector3.one;
-        dissappearPS.transform.localScale = Vector3.one;
-        countingCanvas.transform.localScale = Vector3.one;
+        droneTransform.localScale = originalDroneScale;
+        dissappearPS.transform.localScale = originalDissapearPSScale;
+        countingCanvas.transform.localScale = originalCanvasScale;
 
         objectPooler.Instance.returnObject("shooterDrone", gameObject);
     }

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GH_Lite_01_A
+  m_Name: Corruption Mat 1
   m_Shader: {fileID: 4800000, guid: deed7dc2663f7a54d85ca70d1161a0c8, type: 3}
   m_ShaderKeywords: _DIST_CHROM_ON _EMISSION _GLITCHCOLOR_ON _MASK_TYPE_ON _X_ON _Y_ON
   m_LightmapFlags: 1
