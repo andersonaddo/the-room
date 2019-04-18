@@ -5,10 +5,11 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: HG_Adv_06
-  m_Shader: {fileID: 4800000, guid: 79aed62ebf633114bb3e8df1cea2425f, type: 3}
-  m_ShaderKeywords: _EMISSION _GLITCHCOLOR_ON _X_ON _Y_ON
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GH_Lite_01_A
+  m_Shader: {fileID: 4800000, guid: deed7dc2663f7a54d85ca70d1161a0c8, type: 3}
+  m_ShaderKeywords: _DIST_CHROM_ON _EMISSION _GLITCHCOLOR_ON _MASK_TYPE_ON _X_ON _Y_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -43,11 +44,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _M_map:
-        m_Texture: {fileID: 2800000, guid: f5b272b22cf8f434689ef61dc4661e94, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 0.3, y: 0.3}
         m_Offset: {x: 1, y: 1}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ffa9c02760c2b4e8eb9814ec06c4b05b, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,8 +56,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _N_map:
-        m_Texture: {fileID: 2800000, guid: ffa9c02760c2b4e8eb9814ec06c4b05b, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 5a1bb16ecdff42fba8ad3aa6decbf6d1, type: 3}
+        m_Scale: {x: 20, y: 20}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -67,19 +68,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _originalDiffuse:
-        m_Texture: {fileID: 2800000, guid: 0307573d69928734fb69f72673399a00, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Zoom: 10.89
     - _Amount: 1
-    - _Amplitude: 100
-    - _Bias: 0.15
+    - _Amplitude: 0
+    - _Bias: 0.403
     - _BumpScale: 1
-    - _Circle_wave: 16
+    - _Circle_wave: 5
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Distance: 2
+    - _Distance: 0
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -90,38 +90,39 @@ Material:
     - _Opacity: 1
     - _Opacity_gl: 1
     - _OriginalUVSwitch: 0
-    - _OrigineX: 0.5
+    - _OrigineX: 0
     - _OrigineY: 0
     - _Parallax: 0.02
-    - _Power: 1.5
+    - _Power: 1.84
     - _Rotation: 0
-    - _Scale: 5
+    - _Scale: 10
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.897
-    - _Speed_Up: 10
-    - _Speed_face: 10
-    - _Speed_wave: 100
+    - _Speed: -0.271
+    - _Speed_Up: 0
+    - _Speed_face: 1
+    - _Speed_wave: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _X: 1
     - _Y: 1
     - _ZWrite: 1
     - _Zoom: 1
-    - _a: 12.5
-    - _cut_level: 6
-    - _deform: 1.5
-    - _dist_chrom: 0
+    - _a: 0
+    - _cut_level: 10
+    - _deform: 11
+    - _dist_chrom: 1
     - _glitchColor: 1
-    - _grey: 1
-    - _intensity: 7.4
-    - _mask_type: 0
+    - _intensity: 23.43
+    - _mask_type: 1
+    - _monchrom: 1
     - _monochrom: 0
-    - _noise_details: 10.67
+    - _noise_details: 8.08
     - _t: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color_diff: {r: 0.25, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _diff_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _glitchColor_c: {r: 1, g: 0.2275862, b: 0, a: 1}
+    - _GlitchColor: {r: 1, g: 0, b: 0.018100739, a: 1}
+    - _diff_Color: {r: 0, g: 0, b: 0, a: 1}
+    - _glitchColor_c: {r: 1, g: 1, b: 1, a: 1}

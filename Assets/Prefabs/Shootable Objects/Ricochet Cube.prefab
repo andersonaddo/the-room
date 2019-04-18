@@ -123,7 +123,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 0, b: 0.9203696, a: 1}
+  m_Color: {r: 1, g: 0.6922987, b: 0, a: 1}
   m_Intensity: 0.48
   m_Range: 4.45
   m_SpotAngle: 30
@@ -247,8 +247,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0.78344727, a: 1}
-      key1: {r: 0.6792453, g: 0, b: 0.31593597, a: 0}
+      key0: {r: 1, g: 0.97081006, b: 0, a: 1}
+      key1: {r: 1, g: 0.043130882, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

@@ -1,0 +1,1 @@
+Holo with Color.shader is simply a modified version of the Holo shader from the HOLO_FX asset pack. I've modified it to allow me to change the color of the distrotion effects
