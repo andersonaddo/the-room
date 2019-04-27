@@ -1379,7 +1379,7 @@ MonoBehaviour:
     value: 2
   opacity:
     overrideState: 1
-    value: 0.594
+    value: 0.7
   color:
     overrideState: 1
     value: {r: 1, g: 0, b: 0, a: 1}

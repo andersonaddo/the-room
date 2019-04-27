@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class corruptionShooterDrone : MonoBehaviour, IShootableCube
 {
@@ -13,7 +14,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         get { return _type; }
     }
 
-    public iTween.EaseType launchEaseType;
+    public Ease launchEaseType;
 
     [SerializeField] float droneSpinningSpeed;
     [SerializeField] Transform droneTransform;
@@ -25,14 +26,14 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
 
     float currentShootProgress;
     Image progressDisplay;
-    GameObject countingCanvas;
+    GameObject progressCanvas;
 
     Vector3 originalCanvasScale, originalDroneScale, originalDissapearPSScale;
 
     Transform target;
     MyV3DLaserController laser;
 
-    [SerializeField] float laserSpeed, aliveTimeAfterHit, shrinkTime, aliveTimeAfterExplosion;
+    [SerializeField] float laserSpeed, laserAliveTime, aliveTimeAfterHit, shrinkTime;
     [SerializeField] GameObject dissappearPS, explosionPS;
     [SerializeField] int damageOnHit;
     [Tooltip("X = shake magnitude, Y = shake roughness")][SerializeField] Vector2 shake;
@@ -41,9 +42,9 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
     {
         laser = GetComponentInChildren<MyV3DLaserController>();
         progressDisplay = GetComponentInChildren<Image>();
-        countingCanvas = GetComponentInChildren<Canvas>().gameObject;
+        progressCanvas = GetComponentInChildren<Canvas>().gameObject;
 
-        originalCanvasScale = countingCanvas.transform.localScale;
+        originalCanvasScale = progressCanvas.transform.localScale;
         originalDroneScale = droneTransform.localScale;
         originalDissapearPSScale = dissappearPS.transform.localScale;
     }
@@ -52,6 +53,14 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
     {
         this.target = target;
         laser.initialize(target);
+    }
+
+    public void launch(Vector3 restPostion, float launchSpeed)
+    {
+        transform.DOMove(restPostion, launchSpeed)
+            .SetSpeedBased()
+            .SetEase(launchEaseType)
+            .OnComplete(enableShooting);
     }
 
     void Update()
@@ -77,14 +86,6 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         droneTransform.Rotate(Vector3.forward * droneSpinningSpeed * Time.deltaTime, Space.Self);
     }
 
-    public void launch(Vector3 restPostion, float launchSpeed)
-    {
-        iTween.MoveTo(gameObject, iTween.Hash("position", restPostion,
-                                              "easeType", launchEaseType,
-                                              "onComplete", "enableShooting",
-                                              "onCompleteTarget", gameObject,
-                                              "speed", launchSpeed));
-    }
 
     public void onShot(Vector3 shotPosition, damageEffectors damageEffector)
     {
@@ -109,7 +110,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         hasShot = true;
         laser.enabled = true;
 
-        Vector3 laserTip = laser.transform.position; //Local Space
+        Vector3 laserTip = laser.transform.position; 
         laser.startShooting();
 
         while (laserTip != target.position)
@@ -122,12 +123,14 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         //Laser has reached player now...
         FindObjectOfType<playerDamager>().inflictDamage(damageOnHit, shake);
 
+        yield return new WaitForSeconds(laserAliveTime);
+        laser.stopShooting();
+
         //Done with shooting, now about to disappear
-        yield return new WaitForSeconds(aliveTimeAfterHit);
+        yield return new WaitForSeconds(aliveTimeAfterHit - laserAliveTime);
         hitBox.enabled = false; //Cannot be hit anymore;
         displayDissapearEffect();
-        laser.stopShooting();
-        shrinkWithItween();
+        shrinkWithTween();
         yield return new WaitForSeconds(shrinkTime);
         resetForPooling();
     }
@@ -137,11 +140,11 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         dissappearPS.SetActive(true);
     }
 
-    private void shrinkWithItween()
+    private void shrinkWithTween()
     {
-        iTween.ScaleTo(droneTransform.gameObject, Vector3.zero, shrinkTime);
-        iTween.ScaleTo(countingCanvas, Vector3.zero, shrinkTime);
-        iTween.ScaleTo(dissappearPS, Vector3.zero, shrinkTime);
+        droneTransform.DOScale(Vector3.zero, shrinkTime);
+        progressCanvas.transform.DOScale(Vector3.zero, shrinkTime);
+        dissappearPS.transform.DOScale(Vector3.zero, shrinkTime);
     }
 
     IEnumerator Explode()
@@ -151,7 +154,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
         displayExplosion();
         laser.stopShooting();
         droneTransform.gameObject.SetActive(false);
-        yield return new WaitForSeconds(shrinkTime + 0.5f);
+        yield return new WaitForSeconds(shrinkTime + 0.5f); //0.5f added to give tweens time to kill themselves
         resetForPooling();
     }
 
@@ -167,10 +170,6 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
     void resetForPooling()
     {
         StopAllCoroutines();
-
-        //The ScaleTo iTweens seem to stay a bit longer after they've finished, 
-        //and they can prevent me from rescaling my children to their original scales if they're not stopped
-        iTween.Stop(gameObject, true); 
  
         hitBox.enabled = true;
         progressDisplay.enabled = true;
@@ -188,7 +187,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
 
         droneTransform.localScale = originalDroneScale;
         dissappearPS.transform.localScale = originalDissapearPSScale;
-        countingCanvas.transform.localScale = originalCanvasScale;
+        progressCanvas.transform.localScale = originalCanvasScale;
 
         objectPooler.Instance.returnObject("shooterDrone", gameObject);
     }

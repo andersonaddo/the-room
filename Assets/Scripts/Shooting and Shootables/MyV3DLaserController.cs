@@ -51,7 +51,7 @@ public class MyV3DLaserController : MonoBehaviour
         UpdateMaxLengths();
     }
 
-    //This is called whent he parent is initialized after being gotten from it's object pool, 
+    //This is called when the parent is initialized after being gotten from it's object pool, 
     //so it's essentially an initialization that resets the whole script
     public void initialize(Transform target) 
     {

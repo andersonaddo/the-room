@@ -114,5 +114,5 @@ Material:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color_diff: {r: 0.25, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlitchColor: {r: 7.129739, g: 0, b: 0.7575708, a: 1}
+    - _GlitchColor: {r: 0.18299939, g: 0, b: 0.021078484, a: 1}
     - _diff_Color: {r: 0, g: 0, b: 0, a: 1}
