@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21479671d3c6a6a41a9d4fb8604597ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliveTime: 14
+  aliveTime: 9
   startOnAwake: 0
 --- !u!114 &6938846827482528778
 MonoBehaviour:

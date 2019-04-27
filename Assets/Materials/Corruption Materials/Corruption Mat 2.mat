@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _M_map:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 0.5, y: 0.5}
+        m_Scale: {x: 0.4, y: 0.4}
         m_Offset: {x: 1, y: 1}
     - _MainTex:
         m_Texture: {fileID: 0}
@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _N_map:
         m_Texture: {fileID: 2800000, guid: b1c34fac099b18c46a12d35aec14a39e, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.4, y: 0.4}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -94,7 +94,7 @@ Material:
     - _Scale: 10
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.382
+    - _Speed: 0.756
     - _Speed_Up: 0
     - _SrcBlend: 1
     - _UVSec: 0
@@ -114,5 +114,5 @@ Material:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color_diff: {r: 0.25, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GlitchColor: {r: 0.12, g: 0.024941178, b: 0, a: 1}
+    - _GlitchColor: {r: 0.83137256, g: 0.03137255, b: 0.015686275, a: 1}
     - _diff_Color: {r: 0.025980392, g: 0.025980392, b: 0.025980392, a: 1}
