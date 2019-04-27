@@ -6,6 +6,7 @@ using UnityEngine;
 public class gameManager : MonoBehaviour {
 
     public static gameManager Instance;
+    transitioner gameStageTransitioner;
 
     public cubeTypes currentTargetType { get; private set; }
     int score;
@@ -35,14 +36,16 @@ public class gameManager : MonoBehaviour {
     void Awake () {
         Instance = this;
         nextThemeChangeTime = Time.time + firstRoomThemeChangeTime;
+        gameStageTransitioner = FindObjectOfType<transitioner>();
         roomVisualsChanger.themeChanged += updateTargetType;
     }
 	
 	void Update () {
 
-        if (Time.time > nextThemeChangeTime)
+        if (gameStageTransitioner.currentStage == transitioner.gameStage.firstRoom
+            && Time.time > nextThemeChangeTime)
         {
-            FindObjectOfType<roomVisualsChanger>().chooseNextTheme();
+            FindObjectOfType<roomVisualsChanger>().goToNextTheme();
             nextThemeChangeTime = Time.time + firstRoomThemeChangeTime;
         }
 	}

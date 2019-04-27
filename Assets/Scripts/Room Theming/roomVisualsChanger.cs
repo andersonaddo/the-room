@@ -45,7 +45,7 @@ public class roomVisualsChanger : MonoBehaviour
         }
     }
 
-    public void chooseNextTheme()
+    public void goToNextTheme()
     {
         currentIndex++;
         if (currentIndex == roomThemes.Count) currentIndex = 0;
