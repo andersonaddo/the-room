@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Fire
+  - Player Shield
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Cubes Cannot Touch
   - Player
   - Creeping Corruption
-  - 
+  - Boss Bullet
   - 
   - 
   - 
