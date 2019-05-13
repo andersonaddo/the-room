@@ -10,11 +10,12 @@ public class pathFollower : MonoBehaviour
     travelPath path;
     float speed;
     float lerpPerFixedUpdate, currentLerp;
+    public bool shouldMove = true;
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (path != null)
+        if (path != null && shouldMove)
         {
             Vector3 nextPoint = getGetNextPointOnPath();
             transform.LookAt(nextPoint);

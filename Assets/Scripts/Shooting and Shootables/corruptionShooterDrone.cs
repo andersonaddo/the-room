@@ -31,7 +31,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
     Vector3 originalCanvasScale, originalDroneScale, originalDissapearPSScale;
 
     Transform target;
-    MyV3DLaserController laser;
+    CorruptionShooterLaserController laser;
 
     [SerializeField] float laserSpeed, laserAliveTime, aliveTimeAfterHit, shrinkTime;
     [SerializeField] GameObject dissappearPS, explosionPS;
@@ -40,7 +40,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
 
     void Awake()
     {
-        laser = GetComponentInChildren<MyV3DLaserController>();
+        laser = GetComponentInChildren<CorruptionShooterLaserController>();
         progressDisplay = GetComponentInChildren<Image>();
         progressCanvas = GetComponentInChildren<Canvas>().gameObject;
 
