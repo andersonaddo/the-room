@@ -47,6 +47,7 @@ public class StartPointEffectControllerV3D : MonoBehaviour
     private void UpdatePointLight()
     {
         // Start Point Light Control
+        if (pointLight == null) return;
         pointLight.color = color;
         pointLight.range = transform.lossyScale.x * pointLightRange;
         pointLight.intensity = resultProgress * pointLightIntensity;
