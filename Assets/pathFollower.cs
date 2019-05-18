@@ -7,9 +7,11 @@ public class pathFollower : MonoBehaviour
     public float travelTime;
     [SerializeField] Vector3 pointRotation;
 
-    travelPath path;
-    float speed;
-    float lerpPerFixedUpdate, currentLerp;
+    public travelPath path { get; private set; }
+    public float speed { get; private set; }
+    float lerpPerFixedUpdate;
+    public float currentLerp { get; private set; }
+
     public bool shouldMove = true;
 
     // Update is called once per frame
@@ -53,5 +55,12 @@ public class pathFollower : MonoBehaviour
         speed = path.length / travelTime;
         lerpPerFixedUpdate = 1 / (path.length / speed) * Time.fixedDeltaTime;
         currentLerp = 0;
+    }
+
+    //Can be called so speed up or slow down follower.
+    public void changeSpeed(float value, bool overwrite = false)
+    {
+        speed = overwrite ? value : (speed + value);
+        lerpPerFixedUpdate = 1 / (path.length / speed) * Time.fixedDeltaTime;
     }
 }

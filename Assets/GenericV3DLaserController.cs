@@ -14,8 +14,8 @@ public class GenericV3DLaserController : MonoBehaviour
 
     [SerializeField] float globalProgressSpeed = 1f;
     [SerializeField] float globalImpactProgressSpeed = 1f;
-    float globalProgress; //Used to monitor the fading out and shrinking effect when you stop shooting
-    float globalImpactProgress; //Used to monitor the impact effect of the lazer when you first start shooting 
+    float globalProgress = 1; //Used to monitor the fading out and shrinking effect when you stop shooting
+    float globalImpactProgress = 1; //Used to monitor the impact effect of the lazer when you first start shooting 
 
     [Tooltip("Affect all the child lazers' and effects' colors")]
     [SerializeField]
@@ -35,24 +35,20 @@ public class GenericV3DLaserController : MonoBehaviour
     LightLineV3D[] lightLines;
     Renderer[] childRenderers;
 
-    void Awake()
-    {
-        laserLines = GetComponentsInChildren<LaserLineV3D>(true);
-        lightLines = GetComponentsInChildren<LightLineV3D>(true);
-        childRenderers = GetComponentsInChildren<Renderer>(true);
-
-        UpdateMaxLengths();
-    }
-
-    //This is called when the parent is initialized after being gotten from it's object pool, 
-    //so it's essentially an initialization that resets the whole script
-    public void initialize(Transform target)
+    //This does need to be called manually before this thing is ever used
+    //This essentially resets the whole script, so this should be called when the object is gotten from a pool too
+    public void initialize()
     {
         globalProgress = 1f;
         globalImpactProgress = 1f;
 
         color = colorRange.Evaluate(Random.Range(0f, 1f));
 
+        laserLines = GetComponentsInChildren<LaserLineV3D>(true);
+        lightLines = GetComponentsInChildren<LightLineV3D>(true);
+        childRenderers = GetComponentsInChildren<Renderer>(true);
+
+        UpdateMaxLengths();
         UpdateEffectManagers();
         UpdateLaserChildren();
         UpdateColorOfChildren();

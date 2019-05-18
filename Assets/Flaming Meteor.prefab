@@ -18772,36 +18772,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &796807517593115065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7614919843529252351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea3e24ff85ac8954cb449008c54173eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  travelTime: 4
-  pointRotation: {x: 0, y: 0, z: 0}
-  shouldMove: 1
---- !u!114 &3368520972704511847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7614919843529252351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1df5842010396748b23992d650b3d35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rockRotSpeed: 720
-  rock: {fileID: 7614919843529474525}
-  pathGenerator: {fileID: 0}
 --- !u!64 &838632877348153477
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18816,6 +18786,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
+--- !u!114 &796807517593115065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614919843529252351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea3e24ff85ac8954cb449008c54173eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travelTime: 5.5
+  pointRotation: {x: 0, y: 0, z: 0}
+  shouldMove: 1
+--- !u!114 &3368520972704511847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614919843529252351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1df5842010396748b23992d650b3d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rock: {fileID: 7614919843529474525}
+  pathGenerator: {fileID: 0}
+  rockRotSpeed: 720
+  lerpLimit: 0.9
 --- !u!1001 &7614919843529349981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18828,21 +18829,16 @@ PrefabInstance:
       value: Flaming Meteor
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000,
-        type: 0}
-    - target: {fileID: 100002, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
       propertyPath: m_Layer
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
       propertyPath: m_Name
       value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
-      propertyPath: m_Layer
-      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
       propertyPath: m_LocalPosition.x

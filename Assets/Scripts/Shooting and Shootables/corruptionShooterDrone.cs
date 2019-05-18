@@ -52,7 +52,7 @@ public class corruptionShooterDrone : MonoBehaviour, IShootableCube
     public void initialize(Transform target) //Called the right before launch
     {
         this.target = target;
-        laser.initialize(target);
+        laser.initialize();
     }
 
     public void launch(Vector3 restPostion, float launchSpeed)
