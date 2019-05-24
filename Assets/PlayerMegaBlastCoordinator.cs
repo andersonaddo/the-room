@@ -16,14 +16,15 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
     public PlayerEnergyBlast rightLaser, leftLaser;
     Vector3 targetPoint;
 
+
     void Awake()
     {
         updateLaserTargetPoints();
 
         PlayerCardboardPointer.pointerClickDown += startShooting;
         PlayerCardboardPointer.pointerClickUp += stopShooting;
-        PlayerCardboardPointer.pointerEnter += signalHitBeginIfNeeded;
-        PlayerCardboardPointer.pointerExit += signalHitEndIfNeeded;
+        PlayerCardboardPointer.pointerEnter += onPointerEnter;
+        PlayerCardboardPointer.pointerExit += onPointerExit;
 
         rightLaser.initialize();
         leftLaser.initialize();
@@ -51,6 +52,8 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
         isShooting = true;
         rightLaser.startShooting();
         leftLaser.startShooting();
+
+        if (currentMeteor != null) currentMeteor.GetComponent<meteorDamager>().signalHit();
     }
 
     void stopShooting()
@@ -61,9 +64,10 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
         leftLaser.stopShooting();
     }
 
-    void signalHitBeginIfNeeded(RaycastResult result)
+    void onPointerEnter(RaycastResult result)
     {
         raycastOnMeteor = result.gameObject.layer == LayerMask.NameToLayer(meteorLayerName);
+
         if (raycastOnMeteor && isShooting)
         {
             currentMeteor = result.gameObject.GetComponentInParent<meteor>();
@@ -71,9 +75,10 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
         }
     }
 
-    void signalHitEndIfNeeded(GameObject go)
+    void onPointerExit(GameObject go)
     {
         if (currentMeteor == null) return;
+
         if (go == currentMeteor.gameObject)
         {
             currentMeteor.signalHitEnd();

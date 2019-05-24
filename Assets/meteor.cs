@@ -72,6 +72,7 @@ public class meteor : MonoBehaviour
         {
             follower.changeSpeed(0, true);
             follower.shouldMove = false; //Comet has been successfully stopped, don't let it move again.
+            GetComponent<meteorDamager>().enableDamage();
         }
     }
 
