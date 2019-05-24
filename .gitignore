@@ -51,4 +51,5 @@ sysinfo.txt
 crashlytics-build.properties
 
 # Ignoring files in my 3rd party asset hub that are actually unused
-\#Unused andor gitignored/
+/#Unused andor gitignored/
+/#Unused andor gitignored.meta
