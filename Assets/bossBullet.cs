@@ -21,6 +21,7 @@ public class bossBullet : MonoBehaviour
         else
         {
             Instantiate(destructionPS, transform.position, Quaternion.LookRotation(FindObjectOfType<Camera>().transform.position - transform.position));
+            bulletStreakCounter.signalBulletDestruction(gameObject);
             Destroy(gameObject);
         }
     }

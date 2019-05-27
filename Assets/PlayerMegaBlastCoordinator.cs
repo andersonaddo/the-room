@@ -7,22 +7,28 @@ using UnityEngine.EventSystems;
 
 public class PlayerMegaBlastCoordinator : MonoBehaviour
 {
-    public bool canShoot = true;
+    [SerializeField] bool _canShoot = true; //To allow for it to stay encapsulated but still changeable in the inspector
+    public bool canShoot{ get{return _canShoot;} }
     bool isShooting;
     [SerializeField] string meteorLayerName;
     bool raycastOnMeteor;
-    meteor currentMeteor;
+    meteorMovementManager currentMeteor;
 
     public PlayerEnergyBlast rightLaser, leftLaser;
     Vector3 targetPoint;
 
+    //When meteors are at that stage where the players need to tap a lot to make 
+    //Metoer explode, then the lazers shouldn't go off immediately when the player lets
+    //go of the trigger
+    public bool isOnDelayMode {get; private set;}
+    [SerializeField] float delayModeTimeDelay;
 
     void Awake()
     {
         updateLaserTargetPoints();
 
-        PlayerCardboardPointer.pointerClickDown += startShooting;
-        PlayerCardboardPointer.pointerClickUp += stopShooting;
+        PlayerCardboardPointer.pointerClickDown += signalHit;
+        PlayerCardboardPointer.pointerClickUp += signalHitEnd;
         PlayerCardboardPointer.pointerEnter += onPointerEnter;
         PlayerCardboardPointer.pointerExit += onPointerExit;
 
@@ -32,7 +38,15 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
 
     void Update()
     {
-        if (canShoot) updateLaserTargetPoints();
+        if (_canShoot) updateLaserTargetPoints();
+    }
+
+    public void reset(){
+        isOnDelayMode = false;
+        currentMeteor = null;
+        isShooting = false;
+        stopLasers();
+        CancelInvoke();
     }
 
     void updateLaserTargetPoints()
@@ -46,20 +60,32 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
         leftLaser.transform.LookAt(targetPoint);
     }
 
-    void startShooting()
+    void signalHit()
     {
-        if (!canShoot) return;
-        isShooting = true;
-        rightLaser.startShooting();
-        leftLaser.startShooting();
-
+        if (!_canShoot) return;
+        if (!isShooting) startShooting();
+        CancelInvoke("stopLasers");
         if (currentMeteor != null) currentMeteor.GetComponent<meteorDamager>().signalHit();
     }
 
-    void stopShooting()
+    void startShooting(){
+        isShooting = true;
+        rightLaser.startShooting();
+        leftLaser.startShooting();
+    }
+
+    void signalHitEnd()
     {
-        isShooting = false;
         if (currentMeteor != null) currentMeteor.signalHitEnd();
+        if (isOnDelayMode) {
+            Invoke("stopLasers", delayModeTimeDelay);
+        }else{
+            stopLasers();
+        }
+    }
+
+    void stopLasers(){
+        isShooting = false;
         rightLaser.stopShooting();
         leftLaser.stopShooting();
     }
@@ -70,7 +96,7 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
 
         if (raycastOnMeteor && isShooting)
         {
-            currentMeteor = result.gameObject.GetComponentInParent<meteor>();
+            currentMeteor = result.gameObject.GetComponentInParent<meteorMovementManager>();
             currentMeteor.signalHitStart();
         }
     }
@@ -84,5 +110,17 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
             currentMeteor.signalHitEnd();
             currentMeteor = null;
         }
+    }
+
+    public void setToDelayMode(){
+        isOnDelayMode = true;
+    }
+
+    public void enableShooting(){
+        _canShoot = true;
+    }
+
+    public void disableShooting(){
+        _canShoot = false;
     }
 }

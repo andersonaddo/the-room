@@ -14,7 +14,13 @@ public class pathFollower : MonoBehaviour
 
     public bool shouldMove = true;
 
-    // Update is called once per frame
+    [SerializeField] bool useRbMove = false;
+    Rigidbody rb;
+
+    void Awake() {
+        if (useRbMove) rb = GetComponent<Rigidbody>();
+    }
+
     void FixedUpdate()
     {
         if (path != null && shouldMove)
@@ -22,7 +28,8 @@ public class pathFollower : MonoBehaviour
             Vector3 nextPoint = getGetNextPointOnPath();
             transform.LookAt(nextPoint);
             transform.Rotate(pointRotation, Space.Self);
-            transform.position = nextPoint;
+            if (useRbMove) rb.MovePosition(nextPoint);
+            else transform.position = nextPoint;
         }
     }
 

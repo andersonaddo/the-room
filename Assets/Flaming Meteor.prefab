@@ -22482,6 +22482,20 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!64 &838632877348153477
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614919843529252349}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
 --- !u!114 &810452399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22495,15 +22509,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxNumberOfClicks: 38
-  postStopAliveTime: 0
+  postStopAliveTime: 15
+  postExplosionAliveTime: 4
   startIntensity: -9
   maxIntensity: 9
   baseColor: {r: 0, g: 1.2313726, b: 1.4980392, a: 0}
-  colorLerpSpeed: 0.9
   rockRenderer: {fileID: 7614919843527050045}
   destroyedRock: {fileID: 6430984186043114982}
-  explosionForce: 20
-  explosionRadius: 10
+  explosionForce: 700
+  explosionRadius: 50
 --- !u!114 &796807517593115065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22534,21 +22548,19 @@ MonoBehaviour:
   rock: {fileID: 7614919843529474525}
   pathGenerator: {fileID: 0}
   rockRotSpeed: 720
-  lerpLimit: 0.9
---- !u!64 &838632877348153477
-MeshCollider:
+  pathLerpLimit: 0.9
+--- !u!114 &6207233936968221513
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7614919843529252349}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 7614919843529252351}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41c088eab8704fccbe1ee9a03d9ffdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7614919843529349981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22571,10 +22583,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
       propertyPath: m_Name
       value: Rock
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22632,18 +22640,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.3
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4.1904
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4.1904
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 4.1904
-      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
@@ -22656,20 +22652,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: c24b187872315c9449295fe7872bde5b, type: 2}
+    - target: {fileID: 400000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.1904
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.1904
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.1904
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
---- !u!4 &7614919843529474527 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400002, guid: f6fee20c8e49b6649950f40c09948293,
-    type: 3}
-  m_PrefabInstance: {fileID: 7614919843529349981}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7614919843529252351 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: f6fee20c8e49b6649950f40c09948293,
-    type: 3}
-  m_PrefabInstance: {fileID: 7614919843529349981}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &7614919843527050045 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2300000, guid: f6fee20c8e49b6649950f40c09948293,
@@ -22685,6 +22681,18 @@ Transform:
 --- !u!1 &7614919843529252349 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: f6fee20c8e49b6649950f40c09948293,
+    type: 3}
+  m_PrefabInstance: {fileID: 7614919843529349981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7614919843529474527 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: f6fee20c8e49b6649950f40c09948293,
+    type: 3}
+  m_PrefabInstance: {fileID: 7614919843529349981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7614919843529252351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: f6fee20c8e49b6649950f40c09948293,
     type: 3}
   m_PrefabInstance: {fileID: 7614919843529349981}
   m_PrefabAsset: {fileID: 0}
