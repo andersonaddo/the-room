@@ -116,6 +116,10 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
         isOnDelayMode = true;
     }
 
+    public void setToNormalMode(){
+        isOnDelayMode = false;
+    }
+
     public void enableShooting(){
         _canShoot = true;
     }

@@ -8,7 +8,7 @@ public class meteorMovementManager : MonoBehaviour
     meteorDamager damager;
 
     [SerializeField] Transform rock;
-    pathFollower follower;
+    public pathFollower follower {get; private set; }
 
     [SerializeField] float rockRotSpeed;
     Vector3 rockRotVector;
@@ -16,6 +16,7 @@ public class meteorMovementManager : MonoBehaviour
     public bool isBeingHit { get; private set; }
     [SerializeField] [Range(0,1)] float pathLerpLimit; //The path lerp at which the comet will stop at if it keeps being hit. Can't be stopped if is passes this
     float deceleration, originalSpeed;
+
 
     //This should be called immediately upon instantiation
     public void intitialize(pathGenerator pathGen)
@@ -25,7 +26,7 @@ public class meteorMovementManager : MonoBehaviour
         follower.setPath(pathGen.bezierPath);
         originalSpeed = follower.speed;
         damager = GetComponent<meteorDamager>();
-        Invoke("destroyMeteor", follower.travelTime * 2.5f);
+        Invoke("destroyMeteorCompleteFail", follower.travelTime * 2.5f);
     }
 
     void Update()
@@ -78,6 +79,14 @@ public class meteorMovementManager : MonoBehaviour
         }
     }
 
+    void destroyMeteorCompleteFail(){
+        GetComponent<meteorDestroyer>().destroyMeteor(meteorDestroyer.metoerDestructionModes.completeFail);
+    }
+
+    void destroyMeteorUnsuccessful(){
+        GetComponent<meteorDestroyer>().destroyMeteor(meteorDestroyer.metoerDestructionModes.stoppedButUnsuccessful);
+    }
+
     private void transitionToDestructionMode()
     {
         follower.changeSpeed(0, true);
@@ -87,8 +96,15 @@ public class meteorMovementManager : MonoBehaviour
         CancelInvoke();
     }
 
-    void destroyMeteor(){
-        GetComponent<meteorDestroyer>().destroyMeteor(meteorDestroyer.metoerDestructionModes.completeFail);
-    }
+    //Called by meteor reseters
+    public void transitionBackToMovementMode(){
+        damager.disableDamage();
 
+        //Will ensure that the meteor will be destroyed 2 seconds after hitting the player
+        Invoke("destroyMeteorUnsuccessful", follower.travelTime * (1-pathLerpLimit) + 2); 
+
+        FindObjectOfType<PlayerMegaBlastCoordinator>().setToNormalMode();
+        follower.changeSpeed(originalSpeed, true);
+        follower.shouldMove = true;
+    }
 }

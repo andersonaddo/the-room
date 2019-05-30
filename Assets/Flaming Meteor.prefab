@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1669706856885547207}
   - component: {fileID: 1550365677365018113}
   - component: {fileID: 1583242592187306025}
-  m_Layer: 18
+  m_Layer: 0
   m_Name: FireEmbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4619,7 +4619,7 @@ GameObject:
   - component: {fileID: 1672326252900396273}
   - component: {fileID: 1583663256534853867}
   - component: {fileID: 1584903852912746007}
-  m_Layer: 18
+  m_Layer: 0
   m_Name: Fire Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9320,7 +9320,7 @@ GameObject:
   - component: {fileID: 5013238693214680815}
   - component: {fileID: 5142069559258071803}
   - component: {fileID: 5141343740177442109}
-  m_Layer: 18
+  m_Layer: 0
   m_Name: Dusty Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17795,7 +17795,7 @@ GameObject:
   - component: {fileID: 7247264866666929284}
   - component: {fileID: 7366886988717365404}
   - component: {fileID: 7369617555616247628}
-  m_Layer: 18
+  m_Layer: 0
   m_Name: Smoke Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22482,20 +22482,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!64 &838632877348153477
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7614919843529252349}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
 --- !u!114 &810452399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22511,13 +22497,15 @@ MonoBehaviour:
   maxNumberOfClicks: 38
   postStopAliveTime: 15
   postExplosionAliveTime: 4
-  startIntensity: -9
+  startIntensity: -4
   maxIntensity: 9
   baseColor: {r: 0, g: 1.2313726, b: 1.4980392, a: 0}
   rockRenderer: {fileID: 7614919843527050045}
   destroyedRock: {fileID: 6430984186043114982}
   explosionForce: 700
   explosionRadius: 50
+  meteorRestarter: {fileID: 1516075407723064279, guid: 6868c6d4392384558a6d6cd19fd81367,
+    type: 3}
 --- !u!114 &796807517593115065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22533,6 +22521,7 @@ MonoBehaviour:
   travelTime: 5.5
   pointRotation: {x: 0, y: 0, z: 0}
   shouldMove: 1
+  useRbMove: 0
 --- !u!114 &3368520972704511847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22546,7 +22535,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rock: {fileID: 7614919843529474525}
-  pathGenerator: {fileID: 0}
   rockRotSpeed: 720
   pathLerpLimit: 0.9
 --- !u!114 &6207233936968221513
@@ -22561,6 +22549,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41c088eab8704fccbe1ee9a03d9ffdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7968038722010960121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614919843529252351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b6efdfd6716472cb5f6b53fc7728a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeMag: 20
+  shakeRough: 20
+  damage: 30
+--- !u!64 &838632877348153477
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614919843529252349}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: f6fee20c8e49b6649950f40c09948293, type: 3}
 --- !u!1001 &7614919843529349981
 PrefabInstance:
   m_ObjectHideFlags: 0

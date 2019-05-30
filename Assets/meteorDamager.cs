@@ -23,6 +23,9 @@ public class meteorDamager : MonoBehaviour
     [SerializeField] GameObject destroyedRock;
     [SerializeField] float explosionForce, explosionRadius;
 
+    [SerializeField] GameObject meteorRestarter;
+    GameObject createdRestarter;
+
 
     void Awake()
     {
@@ -34,7 +37,18 @@ public class meteorDamager : MonoBehaviour
     {
         canBeDamaged = true;
         crackMaterial.color = Color.black;
-        Invoke("destroyMeteorUnsuccessful", postStopAliveTime);
+
+        float restarterTravelTime = meteorRestarter.GetComponent<pathFollower>().travelTime;
+        float restarterLaunchWaitTime = postStopAliveTime - restarterTravelTime;
+        if (restarterLaunchWaitTime <= 0) Debug.LogError("restarterLaunchWaitTime not positive");
+        Invoke("launchMeteorReset", restarterLaunchWaitTime);
+    }
+
+    public void disableDamage()
+    {
+        canBeDamaged = false;
+        CancelInvoke();
+        if (createdRestarter != null) Destroy(createdRestarter);
     }
 
     public void signalHit()
@@ -65,6 +79,7 @@ public class meteorDamager : MonoBehaviour
         rockRenderer.gameObject.SetActive(false);
         canBeDamaged = false;
 
+        if (createdRestarter != null) Destroy(createdRestarter);
         CancelInvoke(); 
 
         foreach (Rigidbody rb in destroyedRock.GetComponentsInChildren<Rigidbody>())
@@ -73,11 +88,12 @@ public class meteorDamager : MonoBehaviour
         Invoke("destroyMeteorSuccessful", postExplosionAliveTime);
     }
 
-    void destroyMeteorUnsuccessful(){
-        GetComponent<meteorDestroyer>().destroyMeteor(meteorDestroyer.metoerDestructionModes.stoppedButUnsuccessful);
-    }
-
     void destroyMeteorSuccessful(){
         GetComponent<meteorDestroyer>().destroyMeteor(meteorDestroyer.metoerDestructionModes.successful);
+    }
+
+    void launchMeteorReset(){
+        createdRestarter = Instantiate(meteorRestarter, Vector3.zero, Quaternion.identity);
+        createdRestarter.GetComponent<pathFollower>().setPath(GetComponent<meteorMovementManager>().follower.path);
     }
 }
