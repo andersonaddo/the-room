@@ -17,5 +17,8 @@ public class meteorPlayerDamager : MonoBehaviour
     IEnumerator damagePlayerUponHit (){
         yield return new WaitUntil(() => GetComponent<pathFollower>().currentLerp >= 1);
         FindObjectOfType<playerDamager>().inflictDamage(damage, new Vector2(shakeMag, shakeRough));
+
+        yield return new WaitForSeconds(2);
+        GetComponent<meteorDestroyer>().destroyMeteor(meteorDestroyer.metoerDestructionModes.completeFail);
     }
 }

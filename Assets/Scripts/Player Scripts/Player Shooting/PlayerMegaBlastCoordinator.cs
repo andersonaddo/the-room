@@ -8,10 +8,10 @@ using UnityEngine.EventSystems;
 public class PlayerMegaBlastCoordinator : MonoBehaviour
 {
     [SerializeField] bool _canShoot = true; //To allow for it to stay encapsulated but still changeable in the inspector
-    public bool canShoot{ get{return _canShoot;} }
-    bool isShooting;
+    public bool canShoot{ get {return _canShoot;} }
+    public bool isShooting {get; private set; }
     [SerializeField] string meteorLayerName;
-    bool raycastOnMeteor;
+    public bool raycastOnMeteor {get; private set;}
     meteorMovementManager currentMeteor;
 
     public PlayerEnergyBlast rightLaser, leftLaser;
@@ -68,12 +68,6 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
         if (currentMeteor != null) currentMeteor.GetComponent<meteorDamager>().signalHit();
     }
 
-    void startShooting(){
-        isShooting = true;
-        rightLaser.startShooting();
-        leftLaser.startShooting();
-    }
-
     void signalHitEnd()
     {
         if (currentMeteor != null) currentMeteor.signalHitEnd();
@@ -82,6 +76,12 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
         }else{
             stopLasers();
         }
+    }
+
+    void startShooting(){
+        isShooting = true;
+        rightLaser.startShooting();
+        leftLaser.startShooting();
     }
 
     void stopLasers(){

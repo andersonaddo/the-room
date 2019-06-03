@@ -26,7 +26,6 @@ public class meteorMovementManager : MonoBehaviour
         follower.setPath(pathGen.bezierPath);
         originalSpeed = follower.speed;
         damager = GetComponent<meteorDamager>();
-        Invoke("destroyMeteorCompleteFail", follower.travelTime * 2.5f);
     }
 
     void Update()
@@ -77,10 +76,6 @@ public class meteorMovementManager : MonoBehaviour
         {
             transitionToDestructionMode();
         }
-    }
-
-    void destroyMeteorCompleteFail(){
-        GetComponent<meteorDestroyer>().destroyMeteor(meteorDestroyer.metoerDestructionModes.completeFail);
     }
 
     void destroyMeteorUnsuccessful(){

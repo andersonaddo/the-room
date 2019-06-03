@@ -687,6 +687,8 @@ GameObject:
   - component: {fileID: 4655139138601034}
   - component: {fileID: 95690985424869934}
   - component: {fileID: 418691440995642566}
+  - component: {fileID: 1293942110}
+  - component: {fileID: 3881695682134561868}
   m_Layer: 0
   m_Name: Demon Skeleton
   m_TagString: Untagged
@@ -719,8 +721,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349150361055734}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a58154c350c4ccf47a6cdad03a8dca1a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 6e092ad3d6b50a14bac692ea833c646a, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 5b92d79c728974803b069a790e6858f1, type: 3}
+  m_Controller: {fileID: 9100000, guid: 42dde4da0ac8f4090ae444888b402aa6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -753,6 +755,32 @@ MonoBehaviour:
   megaBlastCorridnator: {fileID: 0}
   demonBulletLauncher: {fileID: 0}
   metoerPP: {fileID: 0}
+  PostProcessingTweenTime: 1
+--- !u!114 &1293942110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349150361055734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75d589b5e231454bb3e3e35439acf6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &3881695682134561868
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349150361055734}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 6.5984063, z: 1}
+  m_Center: {x: 0, y: 3.1134472, z: 0}
 --- !u!1 &1358933833218600
 GameObject:
   m_ObjectHideFlags: 0
