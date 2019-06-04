@@ -104,11 +104,11 @@ public class PlayerMegaBlastCoordinator : MonoBehaviour
     void onPointerExit(GameObject go)
     {
         if (currentMeteor == null) return;
-
         if (go == currentMeteor.gameObject)
         {
             currentMeteor.signalHitEnd();
             currentMeteor = null;
+            raycastOnMeteor = false;
         }
     }
 

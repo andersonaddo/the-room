@@ -5,44 +5,68 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using DG.Tweening;
 
+/// <summary>
+/// This class manages the general game loop involved when fighting the skeleton.
+/// </summary>
 [RequireComponent(typeof(demonFightScript))]
 public class demonFightScript : MonoBehaviour
 {
 
-    [SerializeField] List<ParticleSystem> meteorParticleSystems = new List<ParticleSystem>();
+    demonAnimationManager demonAnimationManager;
+    demonDamageScript damageManager;
+
+   
     [SerializeField] GameObject meteor;
+    bool meteorDestroyed;
+    [SerializeField] List<ParticleSystem> meteorParticleSystems = new List<ParticleSystem>();
     [SerializeField] List<pathGenerator> possibleMeteorPaths = new List<pathGenerator>();
+    [SerializeField] PostProcessVolume metoerPP;
+    [SerializeField] float PostProcessingTweenTime;
+
+
     [SerializeField] GameObject shield;
     [SerializeField] PlayerBulletLauncher playerBulletLauncher;
     [SerializeField] PlayerMegaBlastCoordinator megaBlastCorridnator;
     [SerializeField] bulletLauncher demonBulletLauncher;
-    [SerializeField] PostProcessVolume metoerPP;
-    [SerializeField] float PostProcessingTweenTime;
     
-    bool meteorDestroyed;
-
-    demonAnimationManager demonAnimationManager;
+    meteorDestroyer.metoerDestructionModes lastDestructionMode;
 
 
-    void Awake(){
+    void Start(){
         foreach (ParticleSystem ps in meteorParticleSystems) ps.Stop(true);
         meteorDestroyer.meteorDestroyed += signalMeteorDestroyed;
         demonAnimationManager = GetComponent<demonAnimationManager>();
+        damageManager = GetComponent<demonDamageScript>();
         StartCoroutine("bossFightGameLoop");
     }
 
     IEnumerator bossFightGameLoop(){
         endMeteorSetPiece(false);
         startShootingSetPiece();
-        yield return new WaitUntil(()=> bulletStreakCounter.consecutiveBulletsDestroyed == 2);
+        yield return new WaitUntil(()=> bulletStreakCounter.consecutiveBulletsDestroyed == 4);
         endShootingSetPiece();
 
         demonAnimationManager.meteorBeginningAnim();
         yield return new WaitUntil(()=> meteorDestroyed);
-        endMeteorSetPiece();
 
-        startShootingSetPiece();
+        if (lastDestructionMode == meteorDestroyer.metoerDestructionModes.successful){
+            endMeteorSetPiece(false);
+            damageManager.enableDamage();
+            playerBulletLauncher.enableShooting();
+            float waitTime = Time.time + 10;
+            yield return new WaitUntil(()=> damageManager.isDead || Time.time >= waitTime);
+            if (!damageManager.isDead){
+                damageManager.disableDamage();
+                startShootingSetPiece();
+            } 
+
+        }else{
+            endMeteorSetPiece();
+            startShootingSetPiece();
+        }
     }
+
+
 
     //There's no need for a "startMeteorSetPiece method bacause the animations called
     //in the demonAnimationManager.meteorBeginningAnim() have that functionality
@@ -70,6 +94,7 @@ public class demonFightScript : MonoBehaviour
 
     void signalMeteorDestroyed(meteorDestroyer.metoerDestructionModes mode){
         meteorDestroyed = true;
+        lastDestructionMode = mode;
     }
 
 

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This simple class should be the  only class that interacts directly with the skeleton's animator component
+/// </summary>
 [RequireComponent(typeof(Animator))]
 public class demonAnimationManager : MonoBehaviour
 {
@@ -16,15 +19,8 @@ public class demonAnimationManager : MonoBehaviour
         playerBlastScript = FindObjectOfType<PlayerMegaBlastCoordinator>();
     }
 
-    public void meteorBeginningAnim(){
-        animator.SetTrigger("callMeteors");
-    }
-
-    public void meteorEndAnim(){
-        animator.SetTrigger("dismissMeteors");
-    }
-
     void Update(){
+        //Cause the skeleton to show pain if the player is starting to damage a metoer
         if (playerBlastScript.canShoot 
             && playerBlastScript.raycastOnMeteor 
             && playerBlastScript.isShooting
@@ -33,5 +29,30 @@ public class demonAnimationManager : MonoBehaviour
             }else{
                 animator.SetBool("isSuffering", false);
             }
+    }
+
+    public void meteorBeginningAnim(){
+        animator.SetTrigger("callMeteors");
+    }
+
+    public void meteorEndAnim(){
+        animator.SetTrigger("dismissMeteors");
+    }
+
+    public void startDizziness(){
+        animator.SetBool("isDizzy", true);
+    }
+
+    public void endDizziness(){
+        animator.SetBool("isDizzy", false);
+    }
+
+    public void triggerHitAnim(){
+        animator.SetTrigger("triggerDamage");
+    }
+
+    public void triggerDeathAnim(){
+        animator.SetTrigger("die");
+        animator.SetBool("isDead", true);
     }
 }
