@@ -43,7 +43,7 @@ public class demonFightScript : MonoBehaviour
     IEnumerator bossFightGameLoop(){
         endMeteorSetPiece(false);
         startShootingSetPiece();
-        yield return new WaitUntil(()=> bulletStreakCounter.consecutiveBulletsDestroyed == 4);
+        yield return new WaitUntil(()=> bulletStreakCounter.consecutiveBulletsDestroyed == 3);
         endShootingSetPiece();
 
         demonAnimationManager.meteorBeginningAnim();

@@ -115,7 +115,7 @@ Material:
     - _OpacityStartPower: 0
     - _OpacityStartShape: 0
     - _Parallax: 0.02
-    - _RimPower: 0.1
+    - _RimPower: 2
     - _ScanSpeed: -0.53
     - _ScanTiling: 10
     - _ShapeAddEndPosition: 4
@@ -140,5 +140,5 @@ Material:
     - _Direction: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FinalColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MainColor: {r: 0, g: 1, b: 0.78442454, a: 1}
+    - _MainColor: {r: 0, g: 0.9908633, b: 1, a: 1}
     - _RimColor: {r: 0, g: 1, b: 0.757931, a: 1}

@@ -745,19 +745,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b5a40df50e5b4ddc96d38b003f8d7a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meteor: {fileID: 7614919843529252351, guid: f88e74f9243a0f944aa7bd9b58b910a9, type: 3}
   meteorParticleSystems:
   - {fileID: 0}
   - {fileID: 0}
-  meteor: {fileID: 7614919843529252351, guid: f88e74f9243a0f944aa7bd9b58b910a9, type: 3}
   possibleMeteorPaths:
   - {fileID: 0}
   - {fileID: 0}
+  metoerPP: {fileID: 0}
+  PostProcessingTweenTime: 1
   shield: {fileID: 0}
   playerBulletLauncher: {fileID: 0}
   megaBlastCorridnator: {fileID: 0}
   demonBulletLauncher: {fileID: 0}
-  metoerPP: {fileID: 0}
-  PostProcessingTweenTime: 1
 --- !u!114 &1293942110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,11 +783,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceField: {fileID: 0}
+  fieldFadeTime: 1
   hitBox: {fileID: 3881695682134561868}
   maxHealth: 100
-  fieldFadeTime: 1
-  playerBulletLayerName: Player Bullet
   damagePerHit: 20
+  playerBulletLayerName: Player Bullet
 --- !u!65 &3881695682134561868
 BoxCollider:
   m_ObjectHideFlags: 0
