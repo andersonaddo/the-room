@@ -13,10 +13,13 @@ of this repo in case anyone feels like finishing this *cough* awesome *cough* ga
 By the way, here's the order of the levels
 
 - First stage is the cube stage
-
 - Second stage is the corridor stage with the drones
-
 - The third stage is the boss fight with the flaming skeleton.
+
+<img src="pics/pic 1.png" alt="Level 1" height=100 align=center href="https://www.instagram.com/p/BupZw7kBrze/" /> <img src="pics/pic 2.png" alt="Level 2" height=100 align=center href="https://www.instagram.com/p/BwaQ8ZeBKmd/"/> <img src="pics/pic 3.png" alt="Level 3" height=100 align=center href="https://www.instagram.com/p/ByIEWNmFYvS/" />
+
+
+
 
 ## 1st September 2020 Update: Oopsies
 
