@@ -16,7 +16,9 @@ By the way, here's the order of the levels
 - Second stage is the corridor stage with the drones
 - The third stage is the boss fight with the flaming skeleton.
 
-<img src="pics/pic 1.png" alt="Level 1" height=100 align=center href="https://www.instagram.com/p/BupZw7kBrze/" /> <img src="pics/pic 2.png" alt="Level 2" height=100 align=center href="https://www.instagram.com/p/BwaQ8ZeBKmd/"/> <img src="pics/pic 3.png" alt="Level 3" height=100 align=center href="https://www.instagram.com/p/ByIEWNmFYvS/" />
+<img src="pics/pic 1.png" alt="Level 1" height=150 align=center href="https://www.instagram.com/p/BupZw7kBrze/" /> <img src="pics/pic 2.png" alt="Level 2" height=150 align=center href="https://www.instagram.com/p/BwaQ8ZeBKmd/"/> <img src="pics/pic 3.png" alt="Level 3" height=150 align=center href="https://www.instagram.com/p/ByIEWNmFYvS/" />
+
+(By the way, those pictures are clickable! They link to videos)
 
 
 
